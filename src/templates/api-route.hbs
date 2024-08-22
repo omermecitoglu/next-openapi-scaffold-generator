@@ -1,0 +1,10 @@
+import defineRoute from "@omer-x/next-openapi-route-handler";
+import z from "zod";
+import db from "~/database";
+import { New{{ pascalCaseSingular }}DTO, {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
+import create{{ pascalCaseSingular }} from "~/operations/create-{{ kebabCaseSingular }}";
+import get{{ pascalCasePlural }} from "~/operations/get-{{ kebabCasePlural }}";
+
+{{{ readAllOperation }}}
+
+{{{ createOperation }}}
