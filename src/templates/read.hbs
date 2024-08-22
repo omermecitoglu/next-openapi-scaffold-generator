@@ -1,0 +1,19 @@
+export const { GET } = defineRoute({
+  operationId: "get{{ pascalCaseSingular }}",
+  method: "GET",
+  summary: "Get {{ noCaseSingular }}",
+  description: "Get a specific {{ noCaseSingular }} by ID",
+  tags: ["{{ capitalCasePlural }}"],
+  pathParams: {{ pascalCaseSingular }}DTO.pick({ id: true }),
+  action: async ({ pathParams }) => {
+    const {{ camelCaseSingular }} = await get{{ pascalCaseSingular }}(db, pathParams.id);
+    if ({{ camelCaseSingular }}) {
+      return Response.json({{ camelCaseSingular }});
+    }
+    return new Response(null, { status: 404 });
+  },
+  responses: {
+    200: { description: "{{ onlyFirstCapitalCaseSingular }} found", content: {{ pascalCaseSingular }}DTO },
+    404: { description: "{{ onlyFirstCapitalCaseSingular }} not found" },
+  },
+});
