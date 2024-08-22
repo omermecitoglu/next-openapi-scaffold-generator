@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "outDir": "bin",
+    "target": "ESNext",
+    "lib": [],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": false,
+    "plugins": [
+    ],
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+  },
+  "include": [
+    "**/*.ts",
+  ],
+  "exclude": ["node_modules"]
+}
