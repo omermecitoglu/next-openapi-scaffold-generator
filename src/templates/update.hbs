@@ -1,0 +1,20 @@
+export const { PATCH } = defineRoute({
+  operationId: "update{{ pascalCaseSingular }}",
+  method: "PATCH",
+  summary: "Update {{ noCaseSingular }}",
+  description: "Update a specific {{ noCaseSingular }} by ID",
+  tags: ["{{ capitalCasePlural }}"],
+  pathParams: {{ pascalCaseSingular }}DTO.pick({ id: true }),
+  requestBody: {{ pascalCaseSingular }}PatchDTO,
+  action: async ({ pathParams, body }) => {
+    const {{ camelCaseSingular }} = await update{{ pascalCaseSingular }}(db, pathParams.id, body);
+    if ({{ camelCaseSingular }}?.id === pathParams.id) {
+      return Response.json({{ camelCaseSingular }});
+    }
+    return new Response(null, { status: 404 });
+  },
+  responses: {
+    200: { description: "{{ onlyFirstCapitalCaseSingular }} updated successfully", content: {{ pascalCaseSingular }}DTO },
+    404: { description: "{{ onlyFirstCapitalCaseSingular }} not found" },
+  },
+});
