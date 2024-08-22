@@ -1,0 +1,17 @@
+export const { GET } = defineRoute({
+  operationId: "get{{ pascalCasePlural }}",
+  method: "GET",
+  summary: "Get all {{ noCasePlural }}",
+  description: "Retrieve a list of {{ noCasePlural }}",
+  tags: ["{{ capitalCasePlural }}"],
+  queryParams: z.object({
+    select: {{ pascalCaseSingular }}DTO.keyof().array().default([])
+      .describe("List of the column names"),
+  }),
+  action: async ({ queryParams }) => {
+    return Response.json(await get{{ pascalCasePlural }}(db, queryParams.select));
+  },
+  responses: {
+    200: { description: "Returns a list of {{ noCasePlural }}", content: {{ pascalCaseSingular }}DTO, isArray: true },
+  },
+});
