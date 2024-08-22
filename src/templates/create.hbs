@@ -1,0 +1,15 @@
+export const { POST } = defineRoute({
+  operationId: "create{{ pascalCaseSingular }}",
+  method: "POST",
+  summary: "Create {{ noCaseSingular }}",
+  description: "Create a new {{ noCaseSingular }}",
+  tags: ["{{ capitalCasePlural }}"],
+  requestBody: New{{ pascalCaseSingular }}DTO,
+  action: async ({ body }) => {
+    const {{ camelCaseSingular }} = await create{{ pascalCaseSingular }}(db, body);
+    return Response.json({{ camelCaseSingular }}, { status: 201 });
+  },
+  responses: {
+    201: { description: "{{ onlyFirstCapitalCaseSingular }} created successfully", content: {{ pascalCaseSingular }}DTO },
+  },
+});
