@@ -1,3 +1,4 @@
+import InlineImportPlugin from "esbuild-plugin-inline-import";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -5,4 +6,7 @@ export default defineConfig({
   entry: ["src/index.ts"],
   splitting: false,
   clean: true,
+  esbuildPlugins: [
+    InlineImportPlugin({ filter: /\.hbs$/ }),
+  ],
 });
