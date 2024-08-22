@@ -10,6 +10,16 @@ const jestConfig: JestConfigWithTsJest = {
   moduleNameMapper: {
     "^~/(.*)$": "<rootDir>/src/$1",
   },
+  transform: {
+    "^.+\\.[tj]s$": ["ts-jest", {
+      tsconfig: {
+        allowJs: true,
+      },
+    }],
+  },
+  transformIgnorePatterns: [
+    "<rootDir>/node_modules/(?!change-case)",
+  ],
 };
 
 export default jestConfig;
