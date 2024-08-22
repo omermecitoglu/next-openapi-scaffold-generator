@@ -1,0 +1,19 @@
+export const { DELETE } = defineRoute({
+  operationId: "delete{{ pascalCaseSingular }}",
+  method: "DELETE",
+  summary: "Delete {{ noCaseSingular }}",
+  description: "Delete a specific {{ noCaseSingular }} by ID",
+  tags: ["{{ capitalCasePlural }}"],
+  pathParams: {{ pascalCaseSingular }}DTO.pick({ id: true }),
+  action: async ({ pathParams }) => {
+    const {{ camelCaseSingular }} = await delete{{ pascalCaseSingular }}(db, pathParams.id);
+    if ({{ camelCaseSingular }}?.id === pathParams.id) {
+      return new Response(null, { status: 204 });
+    }
+    return new Response(null, { status: 404 });
+  },
+  responses: {
+    204: { description: "{{ onlyFirstCapitalCaseSingular }} deleted successfully" },
+    404: { description: "{{ onlyFirstCapitalCaseSingular }} not found" },
+  },
+});
