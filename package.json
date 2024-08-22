@@ -1,5 +1,50 @@
 {
+  "name": "@omer-x/next-openapi-scaffold-generator",
+  "version": "0.0.0",
+  "description": "Generates model, schema and API routes for CRUD operations",
+  "keywords": [
+    "next",
+    "openapi",
+    "scaffold",
+    "generator",
+    "swagger",
+    "api",
+    "crud",
+    "schema",
+    "model",
+    "typescript",
+    "ts",
+    "nextjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omermecitoglu/next-openapi-scaffold-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omermecitoglu/next-openapi-scaffold-generator/issues"
+  },
+  "homepage": "https://github.com/omermecitoglu/next-openapi-scaffold-generator#readme",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Omer Mecitoglu",
+    "email": "omer.mecitoglu@gmail.com",
+    "url": "https://omermecitoglu.github.io"
+  },
+  "license": "MIT",
+  "main": "bin/index.js",
+  "bin": {
+    "generate-scaffold": "./bin/index.js"
+  },
+  "files": [
+    "bin/"
+  ],
   "type": "module",
+  "engines": {
+    "node": ">=14.8.0"
+  },
   "scripts": {
     "test": "jest",
     "dev": "tsup --watch",
