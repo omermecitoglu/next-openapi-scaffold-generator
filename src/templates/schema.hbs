@@ -1,0 +1,28 @@
+import { relations, sql } from "drizzle-orm";
+import { bigint, boolean, char, index, integer, pgTable, primaryKey, smallint, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+
+export const {{ camelCasePlural }} = pgTable("{{ snakeCasePlural }}", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  // ...
+  exampleInteger: integer("example_integer").notNull().default(2147483647),
+  exampleSmallInt: smallint("example_small_int").notNull().default(32767),
+  exampleBigInt: bigint("example_big_int", { mode: "number" }).notNull().default(Number.MAX_SAFE_INTEGER),
+  exampleBiggerInt: bigint("example_bigger_int", { mode: "bigint" }).notNull().default(0),
+  exampleBoolean: boolean("example_boolean").notNull().default(false),
+  exampleText: text("example_text").notNull().default("Lorem ipsum dolor sit amet"),
+  exampleVarchar: varchar("example_varchar", { length: 16 }).notNull().default("hello world"),
+  examplechar: char("example_char", { length: 16 }).notNull().default("hello world "),
+  // ...
+  createdAt: timestamp("created_at", { withTimezone: true, precision: 3 }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, precision: 3 }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+}, table => ({
+  createdAtIdx: index().on(table.createdAt),
+}));
+
+export const relationsOf{{ pascalCasePlural }} = relations({{ camelCasePlural }}, ({ many, one }) => ({
+  master: one(masters, {
+    fields: [{{ camelCasePlural }}.masterId],
+    references: [masters.id],
+  }),
+  slaves: many(slaves),
+}));
