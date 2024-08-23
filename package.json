@@ -36,7 +36,7 @@
   "license": "MIT",
   "main": "bin/index.js",
   "bin": {
-    "generate-scaffold": "./bin/index.js"
+    "generate-scaffold": "bin/index.js"
   },
   "files": [
     "bin/"
