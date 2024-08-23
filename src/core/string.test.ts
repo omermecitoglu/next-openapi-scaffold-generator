@@ -1,5 +1,5 @@
 import { expect, test } from "@jest/globals";
-import { convertToCamelCase, convertToCapitalCase, convertToKebabCase, convertToNoCase, convertToPascalCase } from "./string";
+import { convertToCamelCase, convertToCapitalCase, convertToKebabCase, convertToNoCase, convertToPascalCase, convertToSnakeCase } from "./string";
 
 test("convertToCamelCase", () => {
   expect(convertToCamelCase("user record", false)).toBe("userRecord");
@@ -13,6 +13,13 @@ test("convertToKebabCase", () => {
   expect(convertToKebabCase("user record", true)).toBe("user-records");
   expect(convertToKebabCase("user entry", false)).toBe("user-entry");
   expect(convertToKebabCase("user entry", true)).toBe("user-entries");
+});
+
+test("convertToSnakeCase", () => {
+  expect(convertToSnakeCase("user record", false)).toBe("user_record");
+  expect(convertToSnakeCase("user record", true)).toBe("user_records");
+  expect(convertToSnakeCase("user entry", false)).toBe("user_entry");
+  expect(convertToSnakeCase("user entry", true)).toBe("user_entries");
 });
 
 test("convertToPascalCase", () => {

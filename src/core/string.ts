@@ -1,4 +1,4 @@
-import { camelCase, capitalCase, kebabCase, noCase, pascalCase } from "change-case";
+import { camelCase, capitalCase, kebabCase, noCase, pascalCase, snakeCase } from "change-case";
 import pluralize from "pluralize";
 
 function capitalize(text: string) {
@@ -14,6 +14,11 @@ export function convertToCamelCase(text: string, plural: boolean) {
 export function convertToKebabCase(text: string, plural: boolean) {
   const properText = plural ? pluralize(text) : pluralize.singular(text);
   return kebabCase(properText);
+}
+
+export function convertToSnakeCase(text: string, plural: boolean) {
+  const properText = plural ? pluralize(text) : pluralize.singular(text);
+  return snakeCase(properText);
 }
 
 export function convertToPascalCase(text: string, plural: boolean) {
