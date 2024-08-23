@@ -1,0 +1,15 @@
+import { afterAll, expect, test } from "@jest/globals";
+import db, { evacuatePool } from "~/database";
+import { {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
+import get{{ pascalCasePlural }} from "./get{{ pascalCasePlural }}";
+
+test("get{{ pascalCasePlural }}", async () => {
+  const result = await get{{ pascalCasePlural }}(db, ["id"]);
+  const schema = {{ pascalCaseSingular }}DTO.partial().array();
+  const { success } = schema.safeParse(result);
+  expect(success).toBe(true);
+});
+
+afterAll(done => {
+  evacuatePool().then(() => done());
+});
