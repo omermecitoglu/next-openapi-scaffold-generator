@@ -1,0 +1,13 @@
+import selectColumns from "~/core/column";
+import type database from "~/database";
+import { {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
+import type { z } from "zod";
+
+const selectSchema = {{ pascalCaseSingular }}DTO.keyof().array().default([]);
+
+export default function get{{ pascalCasePlural }}(db: typeof database, select: z.infer<typeof selectSchema>) {
+  return db.query.{{ camelCasePlural }}.findMany({
+    columns: selectColumns(select),
+    orderBy: (u, { asc }) => [asc(u.createdAt)],
+  });
+}
