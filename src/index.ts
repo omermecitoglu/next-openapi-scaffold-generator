@@ -7,6 +7,7 @@ import generateModel from "./templates/model";
 import generateCreateTest from "./templates/operation-tests/create";
 import generateReadAllTest from "./templates/operation-tests/read-all";
 import generateCreateOperation from "./templates/operations/create";
+import generateReadOperation from "./templates/operations/read";
 import generateReadAllOperation from "./templates/operations/read-all";
 import generateSchema from "./templates/schema";
 
@@ -19,3 +20,4 @@ await saveFile("src/operations", `get${convertToPascalCase(modelName, true)}.ts`
 await saveFile("src/operations", `get${convertToPascalCase(modelName, true)}.test.ts`, generateReadAllTest(modelName));
 await saveFile("src/operations", `create${convertToPascalCase(modelName, false)}.ts`, generateCreateOperation(modelName));
 await saveFile("src/operations", `create${convertToPascalCase(modelName, false)}.test.ts`, generateCreateTest(modelName));
+await saveFile("src/operations", `get${convertToPascalCase(modelName, false)}.ts`, generateReadOperation(modelName));

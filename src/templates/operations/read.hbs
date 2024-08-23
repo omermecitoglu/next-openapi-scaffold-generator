@@ -1,0 +1,7 @@
+import type database from "~/database";
+
+export default function get{{ pascalCaseSingular }}(db: typeof database, {{ camelCaseSingular }}Id: string) {
+  return db.query.{{ camelCasePlural }}.findFirst({
+    where: (table, { eq }) => eq(table.id, {{ camelCaseSingular }}Id),
+  });
+}

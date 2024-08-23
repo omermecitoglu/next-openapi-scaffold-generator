@@ -2,7 +2,7 @@ import defineRoute from "@omer-x/next-openapi-route-handler";
 import db from "~/database";
 import { {{ pascalCaseSingular }}DTO, {{ pascalCaseSingular }}PatchDTO } from "~/models/{{ kebabCaseSingular }}";
 import delete{{ pascalCaseSingular }} from "~/operations/delete-{{ kebabCaseSingular }}";
-import get{{ pascalCaseSingular }} from "~/operations/get-{{ kebabCaseSingular }}";
+import get{{ pascalCaseSingular }} from "~/operations/get{{ pascalCaseSingular }}";
 import update{{ pascalCaseSingular }} from "~/operations/update-{{ kebabCaseSingular }}";
 
 {{{ readOperation }}}
