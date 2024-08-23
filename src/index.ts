@@ -10,6 +10,7 @@ import generateReadAllTest from "./templates/operation-tests/read-all";
 import generateCreateOperation from "./templates/operations/create";
 import generateReadOperation from "./templates/operations/read";
 import generateReadAllOperation from "./templates/operations/read-all";
+import generateUpdateOperation from "./templates/operations/update";
 import generateSchema from "./templates/schema";
 
 const [modelName] = await askQuestions(["Enter Model Name: "]);
@@ -23,3 +24,4 @@ await saveFile("src/operations", `create${convertToPascalCase(modelName, false)}
 await saveFile("src/operations", `create${convertToPascalCase(modelName, false)}.test.ts`, generateCreateTest(modelName));
 await saveFile("src/operations", `get${convertToPascalCase(modelName, false)}.ts`, generateReadOperation(modelName));
 await saveFile("src/operations", `get${convertToPascalCase(modelName, false)}.test.ts`, generateReadTest(modelName));
+await saveFile("src/operations", `update${convertToPascalCase(modelName, false)}.ts`, generateUpdateOperation(modelName));

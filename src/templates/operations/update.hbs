@@ -1,0 +1,13 @@
+import { eq } from "drizzle-orm";
+import type database from "~/database";
+import { {{ camelCasePlural }} } from "~/database/schema";
+import type { {{ pascalCaseSingular }}PatchDTO } from "~/models/{{ kebabCaseSingular }}";
+import type { z } from "zod";
+
+export default async function update{{ pascalCaseSingular }}(db: typeof database, {{ camelCaseSingular }}Id: string, patch: z.infer<typeof {{ pascalCaseSingular }}PatchDTO>) {
+  const results = await db.update({{ camelCasePlural }})
+    .set(patch)
+    .where(eq({{ camelCasePlural }}.id, {{ camelCaseSingular }}Id))
+    .returning();
+  return results.shift();
+}
