@@ -1,0 +1,28 @@
+import { createInsertSchema } from "drizzle-zod";
+import { {{ camelCasePlural }} } from "~/database/schema";
+import type z from "zod";
+
+const baseSchema = createInsertSchema({{ camelCasePlural }}, {
+  id: schema => schema.id.readonly().describe("Unique identifier of the {{ noCaseSingular }}"),
+  // describe other fields here
+  createdAt: schema => schema.createdAt.readonly().describe("Creation date of the {{ noCaseSingular }} as an ISO 8601 date string"),
+  updatedAt: schema => schema.updatedAt.readonly().describe("Modification date of the {{ noCaseSingular }} as an ISO 8601 date string"),
+});
+
+export const {{ pascalCaseSingular }}DTO = baseSchema.required()
+  .describe("Represents a {{ noCaseSingular }} definition");
+
+export const New{{ pascalCaseSingular }}DTO = baseSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+}).describe("Data Transfer Object for creating a new {{ noCaseSingular }}");
+
+export const {{ pascalCaseSingular }}PatchDTO = New{{ pascalCaseSingular }}DTO.partial().omit({
+}).describe("Data Transfer Object for updating an existing {{ noCaseSingular }}");
+
+export function test{{ pascalCaseSingular }}Data() {
+  return {
+    // add the required fields here
+  } satisfies z.infer<typeof New{{ pascalCaseSingular }}DTO>;
+}
