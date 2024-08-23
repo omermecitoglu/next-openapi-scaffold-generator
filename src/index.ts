@@ -5,6 +5,7 @@ import generateApiRoute from "./templates/api-route";
 import generateApiRouteWithId from "./templates/api-route-with-id";
 import generateModel from "./templates/model";
 import generateCreateTest from "./templates/operation-tests/create";
+import generateDeleteTest from "./templates/operation-tests/delete";
 import generateReadTest from "./templates/operation-tests/read";
 import generateReadAllTest from "./templates/operation-tests/read-all";
 import generateUpdateTest from "./templates/operation-tests/update";
@@ -29,3 +30,4 @@ await saveFile("src/operations", `get${convertToPascalCase(modelName, false)}.te
 await saveFile("src/operations", `update${convertToPascalCase(modelName, false)}.ts`, generateUpdateOperation(modelName));
 await saveFile("src/operations", `update${convertToPascalCase(modelName, false)}.test.ts`, generateUpdateTest(modelName));
 await saveFile("src/operations", `delete${convertToPascalCase(modelName, false)}.ts`, generateDeleteOperation(modelName));
+await saveFile("src/operations", `delete${convertToPascalCase(modelName, false)}.test.ts`, generateDeleteTest(modelName));
