@@ -1,0 +1,23 @@
+import { afterAll, describe, expect, it } from "@jest/globals";
+import db, { evacuatePool } from "~/database";
+import { {{ pascalCaseSingular }}DTO, test{{ pascalCaseSingular }}Data } from "~/models/{{ kebabCaseSingular }}";
+import create{{ pascalCaseSingular }} from "./create{{ pascalCaseSingular }}";
+import delete{{ pascalCaseSingular }} from "./delete{{ pascalCaseSingular }}";
+
+describe("create{{ pascalCaseSingular }}", () => {
+  const schema = {{ pascalCaseSingular }}DTO.pick({ id: true });
+  const data = test{{ pascalCaseSingular }}Data();
+
+  it("should successfully create a {{ noCaseSingular }}", async () => {
+    await db.transaction(async tx => {
+      const {{ camelCaseSingular }} = await create{{ pascalCaseSingular }}(tx, data);
+      const { success } = schema.safeParse({{ camelCaseSingular }});
+      expect(success).toBe(true);
+      await delete{{ pascalCaseSingular }}(tx, {{ camelCaseSingular }}.id);
+    });
+  });
+});
+
+afterAll(done => {
+  evacuatePool().then(() => done());
+});
