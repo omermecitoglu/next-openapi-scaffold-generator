@@ -1,6 +1,6 @@
 import { camelCase, kebabCase, noCase, pascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
-import handleBarsTemplate from "./read-all.hbs";
+import handleBarsTemplate from "./read.hbs";
 
 type ReadTestTemplate = {
   camelCaseSingular: string,

@@ -1,6 +1,6 @@
 import { camelCase, noCase, pascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
-import handleBarsTemplate from "./update.hbs";
+import handleBarsTemplate from "./model.hbs";
 
 type ModelTemplate = {
   camelCasePlural: string,
