@@ -1,4 +1,4 @@
-import { convertToKebabCase, convertToPascalCase } from "~/core/string";
+import { kebabCase, pascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./api-route-with-id.hbs";
 import generateDeleteOperationRoute from "./routes/delete";
@@ -16,8 +16,8 @@ type ApiRouteWithIdTemplate = {
 export default function generateApiRouteWithId(modelName: string) {
   const template = getTemplate<ApiRouteWithIdTemplate>(handleBarsTemplate);
   return template({
-    kebabCaseSingular: convertToKebabCase(modelName, false),
-    pascalCaseSingular: convertToPascalCase(modelName, false),
+    kebabCaseSingular: kebabCase(modelName, false),
+    pascalCaseSingular: pascalCase(modelName, false),
     readOperation: generateReadOperationRoute(modelName).slice(0, -1),
     updateOperation: generateUpdateOperationRoute(modelName).slice(0, -1),
     deleteOperation: generateDeleteOperationRoute(modelName).slice(0, -1),

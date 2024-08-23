@@ -1,4 +1,4 @@
-import { convertToCapitalCase, convertToNoCase, convertToPascalCase } from "~/core/string";
+import { capitalCase, noCase, pascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./read-all.hbs";
 
@@ -12,9 +12,9 @@ type ReadAllOperationRouteTemplate = {
 export default function generateReadAllOperationRoute(modelName: string) {
   const template = getTemplate<ReadAllOperationRouteTemplate>(handleBarsTemplate);
   return template({
-    capitalCasePlural: convertToCapitalCase(modelName, true, false),
-    noCasePlural: convertToNoCase(modelName, true),
-    pascalCaseSingular: convertToPascalCase(modelName, false),
-    pascalCasePlural: convertToPascalCase(modelName, true),
+    capitalCasePlural: capitalCase(modelName, true, false),
+    noCasePlural: noCase(modelName, true),
+    pascalCaseSingular: pascalCase(modelName, false),
+    pascalCasePlural: pascalCase(modelName, true),
   });
 }

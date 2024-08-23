@@ -1,4 +1,4 @@
-import { convertToCamelCase, convertToPascalCase, convertToSnakeCase } from "~/core/string";
+import { camelCase, pascalCase, snakeCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./update.hbs";
 
@@ -11,8 +11,8 @@ type SchemaTemplate = {
 export default function generateSchema(modelName: string) {
   const template = getTemplate<SchemaTemplate>(handleBarsTemplate);
   return template({
-    camelCasePlural: convertToCamelCase(modelName, true),
-    pascalCasePlural: convertToPascalCase(modelName, true),
-    snakeCasePlural: convertToSnakeCase(modelName, true),
+    camelCasePlural: camelCase(modelName, true),
+    pascalCasePlural: pascalCase(modelName, true),
+    snakeCasePlural: snakeCase(modelName, true),
   });
 }

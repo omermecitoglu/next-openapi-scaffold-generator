@@ -1,4 +1,4 @@
-import { camelCase, capitalCase, kebabCase, noCase, pascalCase, snakeCase } from "change-case";
+import * as changeCase from "change-case";
 import pluralize from "pluralize";
 
 function capitalize(text: string) {
@@ -6,35 +6,35 @@ function capitalize(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 }
 
-export function convertToCamelCase(text: string, plural: boolean) {
+export function camelCase(text: string, plural: boolean) {
   const properText = plural ? pluralize(text) : pluralize.singular(text);
-  return camelCase(properText);
+  return changeCase.camelCase(properText);
 }
 
-export function convertToKebabCase(text: string, plural: boolean) {
+export function kebabCase(text: string, plural: boolean) {
   const properText = plural ? pluralize(text) : pluralize.singular(text);
-  return kebabCase(properText);
+  return changeCase.kebabCase(properText);
 }
 
-export function convertToSnakeCase(text: string, plural: boolean) {
+export function snakeCase(text: string, plural: boolean) {
   const properText = plural ? pluralize(text) : pluralize.singular(text);
-  return snakeCase(properText);
+  return changeCase.snakeCase(properText);
 }
 
-export function convertToPascalCase(text: string, plural: boolean) {
+export function pascalCase(text: string, plural: boolean) {
   const properText = plural ? pluralize(text) : pluralize.singular(text);
-  return pascalCase(properText);
+  return changeCase.pascalCase(properText);
 }
 
-export function convertToNoCase(text: string, plural: boolean) {
+export function noCase(text: string, plural: boolean) {
   const properText = plural ? pluralize(text) : pluralize.singular(text);
-  return noCase(properText);
+  return changeCase.noCase(properText);
 }
 
-export function convertToCapitalCase(text: string, plural: boolean, onlyFirst: boolean) {
+export function capitalCase(text: string, plural: boolean, onlyFirst: boolean) {
   const properText = plural ? pluralize(text) : pluralize.singular(text);
   if (onlyFirst) {
-    return capitalize(noCase(properText));
+    return capitalize(changeCase.noCase(properText));
   }
-  return capitalCase(properText);
+  return changeCase.capitalCase(properText);
 }

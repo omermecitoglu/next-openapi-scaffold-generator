@@ -1,4 +1,4 @@
-import { convertToCamelCase, convertToKebabCase, convertToPascalCase } from "~/core/string";
+import { camelCase, kebabCase, pascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./read-all.hbs";
 
@@ -12,9 +12,9 @@ type CreateOperationTemplate = {
 export default function generateCreateOperation(modelName: string) {
   const template = getTemplate<CreateOperationTemplate>(handleBarsTemplate);
   return template({
-    camelCasePlural: convertToCamelCase(modelName, true),
-    camelCaseSingular: convertToCamelCase(modelName, false),
-    kebabCaseSingular: convertToKebabCase(modelName, false),
-    pascalCaseSingular: convertToPascalCase(modelName, false),
+    camelCasePlural: camelCase(modelName, true),
+    camelCaseSingular: camelCase(modelName, false),
+    kebabCaseSingular: kebabCase(modelName, false),
+    pascalCaseSingular: pascalCase(modelName, false),
   });
 }

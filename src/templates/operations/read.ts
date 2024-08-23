@@ -1,4 +1,4 @@
-import { convertToCamelCase, convertToPascalCase } from "~/core/string";
+import { camelCase, pascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./read-all.hbs";
 
@@ -11,8 +11,8 @@ type ReadOperationTemplate = {
 export default function generateReadOperation(modelName: string) {
   const template = getTemplate<ReadOperationTemplate>(handleBarsTemplate);
   return template({
-    camelCasePlural: convertToCamelCase(modelName, true),
-    camelCaseSingular: convertToCamelCase(modelName, false),
-    pascalCaseSingular: convertToPascalCase(modelName, false),
+    camelCasePlural: camelCase(modelName, true),
+    camelCaseSingular: camelCase(modelName, false),
+    pascalCaseSingular: pascalCase(modelName, false),
   });
 }

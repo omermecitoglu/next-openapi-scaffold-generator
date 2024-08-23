@@ -1,4 +1,4 @@
-import { convertToCamelCase, convertToNoCase, convertToPascalCase } from "~/core/string";
+import { camelCase, noCase, pascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./update.hbs";
 
@@ -11,8 +11,8 @@ type ModelTemplate = {
 export default function generateModel(modelName: string) {
   const template = getTemplate<ModelTemplate>(handleBarsTemplate);
   return template({
-    camelCasePlural: convertToCamelCase(modelName, true),
-    noCaseSingular: convertToNoCase(modelName, false),
-    pascalCaseSingular: convertToPascalCase(modelName, false),
+    camelCasePlural: camelCase(modelName, true),
+    noCaseSingular: noCase(modelName, false),
+    pascalCaseSingular: pascalCase(modelName, false),
   });
 }
