@@ -1,0 +1,38 @@
+import { afterAll, afterEach, beforeEach, describe, expect, it } from "@jest/globals";
+import db, { evacuatePool } from "~/database";
+import { {{ pascalCaseSingular }}DTO, test{{ pascalCaseSingular }}Data } from "~/models/{{ kebabCaseSingular }}";
+import create{{ pascalCaseSingular }} from "./create{{ pascalCaseSingular }}";
+import delete{{ pascalCaseSingular }} from "./delete{{ pascalCaseSingular }}";
+import get{{ pascalCaseSingular }} from "./get{{ pascalCaseSingular }}";
+
+let test{{ pascalCaseSingular }}ID = "";
+
+describe("get{{ pascalCaseSingular }}", () => {
+  const schema = {{ pascalCaseSingular }}DTO;
+
+  it("should fail when trying to find a nonexistent {{ noCaseSingular }}", async () => {
+    const pseudo{{ pascalCaseSingular }}Id = crypto.randomUUID();
+    const result = await get{{ pascalCaseSingular }}(db, pseudo{{ pascalCaseSingular }}Id);
+    const { success } = schema.safeParse(result);
+    expect(success).toBe(false);
+  });
+
+  it("should successfully retrieve an existing {{ noCaseSingular }}", async () => {
+    const result = await get{{ pascalCaseSingular }}(db, test{{ pascalCaseSingular }}ID);
+    const { success } = schema.safeParse(result);
+    expect(success).toBe(true);
+  });
+});
+
+beforeEach(async () => {
+  const {{ camelCaseSingular }} = await create{{ pascalCaseSingular }}(db, test{{ pascalCaseSingular }}Data());
+  test{{ pascalCaseSingular }}ID = {{ camelCaseSingular }}.id;
+});
+
+afterEach(async () => {
+  await delete{{ pascalCaseSingular }}(db, test{{ pascalCaseSingular }}ID);
+});
+
+afterAll(done => {
+  evacuatePool().then(() => done());
+});
