@@ -1,6 +1,6 @@
 {
   "name": "@omer-x/next-openapi-scaffold-generator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generates model, schema and API routes for CRUD operations",
   "keywords": [
     "next",
