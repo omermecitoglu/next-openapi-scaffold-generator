@@ -1,9 +1,9 @@
 import { convertToKebabCase, convertToPascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./api-route-with-id.hbs";
-import generateDeleteOperation from "./delete";
-import generateReadOperation from "./read";
-import generateUpdateOperation from "./update";
+import generateDeleteOperationRoute from "./routes/delete";
+import generateReadOperationRoute from "./routes/read";
+import generateUpdateOperationRoute from "./routes/update";
 
 type ApiRouteWithIdTemplate = {
   kebabCaseSingular: string,
@@ -18,8 +18,8 @@ export default function generateApiRouteWithId(modelName: string) {
   return template({
     kebabCaseSingular: convertToKebabCase(modelName, false),
     pascalCaseSingular: convertToPascalCase(modelName, false),
-    readOperation: generateReadOperation(modelName).slice(0, -1),
-    updateOperation: generateUpdateOperation(modelName).slice(0, -1),
-    deleteOperation: generateDeleteOperation(modelName).slice(0, -1),
+    readOperation: generateReadOperationRoute(modelName).slice(0, -1),
+    updateOperation: generateUpdateOperationRoute(modelName).slice(0, -1),
+    deleteOperation: generateDeleteOperationRoute(modelName).slice(0, -1),
   });
 }

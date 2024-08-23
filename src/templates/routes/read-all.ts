@@ -2,15 +2,15 @@ import { convertToCapitalCase, convertToNoCase, convertToPascalCase } from "~/co
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./read-all.hbs";
 
-type ReadAllOperationTemplate = {
+type ReadAllOperationRouteTemplate = {
   capitalCasePlural: string,
   noCasePlural: string,
   pascalCasePlural: string,
   pascalCaseSingular: string,
 };
 
-export default function generateReadAllOperation(modelName: string) {
-  const template = getTemplate<ReadAllOperationTemplate>(handleBarsTemplate);
+export default function generateReadAllOperationRoute(modelName: string) {
+  const template = getTemplate<ReadAllOperationRouteTemplate>(handleBarsTemplate);
   return template({
     capitalCasePlural: convertToCapitalCase(modelName, true, false),
     noCasePlural: convertToNoCase(modelName, true),

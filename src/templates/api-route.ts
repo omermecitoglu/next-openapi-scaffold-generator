@@ -1,8 +1,8 @@
 import { convertToKebabCase, convertToPascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./api-route.hbs";
-import generateCreateOperation from "./create";
-import generateReadAllOperation from "./read-all";
+import generateCreateOperationRoute from "./routes/create";
+import generateReadAllOperationRoute from "./routes/read-all";
 
 type ApiRouteTemplate = {
   kebabCasePlural: string,
@@ -20,7 +20,7 @@ export default function generateApiRoute(modelName: string) {
     kebabCaseSingular: convertToKebabCase(modelName, false),
     pascalCasePlural: convertToPascalCase(modelName, true),
     pascalCaseSingular: convertToPascalCase(modelName, false),
-    readAllOperation: generateReadAllOperation(modelName).slice(0, -1),
-    createOperation: generateCreateOperation(modelName).slice(0, -1),
+    readAllOperation: generateReadAllOperationRoute(modelName).slice(0, -1),
+    createOperation: generateCreateOperationRoute(modelName).slice(0, -1),
   });
 }

@@ -2,7 +2,7 @@ import { convertToCamelCase, convertToCapitalCase, convertToNoCase, convertToPas
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./update.hbs";
 
-type UpdateOperationTemplate = {
+type UpdateOperationRouteTemplate = {
   camelCaseSingular: string,
   capitalCasePlural: string,
   noCaseSingular: string,
@@ -10,8 +10,8 @@ type UpdateOperationTemplate = {
   pascalCaseSingular: string,
 };
 
-export default function generateUpdateOperation(modelName: string) {
-  const template = getTemplate<UpdateOperationTemplate>(handleBarsTemplate);
+export default function generateUpdateOperationRoute(modelName: string) {
+  const template = getTemplate<UpdateOperationRouteTemplate>(handleBarsTemplate);
   return template({
     camelCaseSingular: convertToCamelCase(modelName, false),
     capitalCasePlural: convertToCapitalCase(modelName, true, false),

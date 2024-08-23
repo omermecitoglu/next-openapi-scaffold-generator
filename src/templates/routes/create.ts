@@ -1,8 +1,8 @@
 import { convertToCamelCase, convertToCapitalCase, convertToNoCase, convertToPascalCase } from "~/core/string";
 import getTemplate from "~/core/template";
-import handleBarsTemplate from "./delete.hbs";
+import handleBarsTemplate from "./create.hbs";
 
-type DeleteOperationTemplate = {
+type CreateOperationRouteTemplate = {
   camelCaseSingular: string,
   capitalCasePlural: string,
   noCaseSingular: string,
@@ -10,8 +10,8 @@ type DeleteOperationTemplate = {
   pascalCaseSingular: string,
 };
 
-export default function generateDeleteOperation(modelName: string) {
-  const template = getTemplate<DeleteOperationTemplate>(handleBarsTemplate);
+export default function generateCreateOperationRoute(modelName: string) {
+  const template = getTemplate<CreateOperationRouteTemplate>(handleBarsTemplate);
   return template({
     camelCaseSingular: convertToCamelCase(modelName, false),
     capitalCasePlural: convertToCapitalCase(modelName, true, false),
