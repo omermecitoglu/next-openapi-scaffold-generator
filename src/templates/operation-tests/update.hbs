@@ -1,0 +1,41 @@
+import { afterAll, afterEach, beforeEach, describe, expect, it } from "@jest/globals";
+import db, { evacuatePool } from "~/database";
+import { {{ pascalCaseSingular }}DTO, test{{ pascalCaseSingular }}Data } from "~/models/{{ kebabCaseSingular }}";
+import create{{ pascalCaseSingular }} from "./create{{ pascalCaseSingular }}";
+import delete{{ pascalCaseSingular }} from "./delete{{ pascalCaseSingular }}";
+import update{{ pascalCaseSingular }} from "./update{{ pascalCaseSingular }}";
+
+let test{{ pascalCaseSingular }}ID = "";
+
+describe("update{{ pascalCaseSingular }}", () => {
+  const schema = {{ pascalCaseSingular }}DTO;
+
+  it("should fail when trying to update a nonexistent {{ noCaseSingular }}", async () => {
+    const pseudo{{ pascalCaseSingular }}Id = crypto.randomUUID();
+    const result = await update{{ pascalCaseSingular }}(db, pseudo{{ pascalCaseSingular }}Id, test{{ pascalCaseSingular }}Data("new.email@example.com"));
+    const { success } = schema.safeParse(result);
+    expect(success).toBe(false);
+  });
+
+  it("should successfully update an existing {{ noCaseSingular }}", async () => {
+    await db.transaction(async tx => {
+      const result = await update{{ pascalCaseSingular }}(tx, test{{ pascalCaseSingular }}ID, test{{ pascalCaseSingular }}Data("new.email@example.com"));
+      const { success } = schema.safeParse(result);
+      expect(success).toBe(true);
+      expect(result?.email).toBe("new.email@example.com");
+    });
+  });
+});
+
+beforeEach(async () => {
+  const {{ camelCaseSingular }} = await create{{ pascalCaseSingular }}(db, test{{ pascalCaseSingular }}Data());
+  test{{ pascalCaseSingular }}ID = {{ camelCaseSingular }}.id;
+});
+
+afterEach(async () => {
+  await delete{{ pascalCaseSingular }}(db, test{{ pascalCaseSingular }}ID);
+});
+
+afterAll(done => {
+  evacuatePool().then(() => done());
+});
