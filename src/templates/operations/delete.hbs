@@ -1,0 +1,10 @@
+import { eq } from "drizzle-orm";
+import type database from "~/database";
+import { {{ camelCasePlural }} } from "~/database/schema";
+
+export default async function delete{{ pascalCaseSingular }}(db: typeof database, {{ camelCaseSingular }}Id: string) {
+  const results = await db.delete({{ camelCasePlural }}).where(eq({{ camelCasePlural }}.id, {{ camelCaseSingular }}Id)).returning({
+    id: {{ camelCasePlural }}.id,
+  });
+  return results.shift();
+}

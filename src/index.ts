@@ -9,6 +9,7 @@ import generateReadTest from "./templates/operation-tests/read";
 import generateReadAllTest from "./templates/operation-tests/read-all";
 import generateUpdateTest from "./templates/operation-tests/update";
 import generateCreateOperation from "./templates/operations/create";
+import generateDeleteOperation from "./templates/operations/delete";
 import generateReadOperation from "./templates/operations/read";
 import generateReadAllOperation from "./templates/operations/read-all";
 import generateUpdateOperation from "./templates/operations/update";
@@ -27,3 +28,4 @@ await saveFile("src/operations", `get${convertToPascalCase(modelName, false)}.ts
 await saveFile("src/operations", `get${convertToPascalCase(modelName, false)}.test.ts`, generateReadTest(modelName));
 await saveFile("src/operations", `update${convertToPascalCase(modelName, false)}.ts`, generateUpdateOperation(modelName));
 await saveFile("src/operations", `update${convertToPascalCase(modelName, false)}.test.ts`, generateUpdateTest(modelName));
+await saveFile("src/operations", `delete${convertToPascalCase(modelName, false)}.ts`, generateDeleteOperation(modelName));
