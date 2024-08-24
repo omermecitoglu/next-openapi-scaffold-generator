@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import type database from "~/database";
-import { {{ camelCasePlural }} } from "~/database/schema";
+import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
 import type { {{ pascalCaseSingular }}PatchDTO } from "~/models/{{ kebabCaseSingular }}";
 import type { z } from "zod";
 

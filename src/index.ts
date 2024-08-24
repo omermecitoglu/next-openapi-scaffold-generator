@@ -1,4 +1,5 @@
-import { saveFile } from "./core/file";
+#!/usr/bin/env node
+import { appendFile, saveFile } from "./core/file";
 import { kebabCase, pascalCase } from "./core/string";
 import { askQuestions } from "./prompt";
 import generateApiRoute from "./templates/api-route";
@@ -20,6 +21,7 @@ const [modelName] = await askQuestions(["Enter Model Name: "]);
 await saveFile(`src/app/${kebabCase(modelName, true)}`, "route.ts", generateApiRoute(modelName));
 await saveFile(`src/app/${kebabCase(modelName, true)}/[id]`, "route.ts", generateApiRouteWithId(modelName));
 await saveFile("src/database/schema", `${kebabCase(modelName, true)}.ts`, generateSchema(modelName));
+await appendFile("src/database/schema", "index.ts", `export * from "./${kebabCase(modelName, true)}";`);
 await saveFile("src/models", `${kebabCase(modelName, false)}.ts`, generateModel(modelName));
 await saveFile("src/operations", `get${pascalCase(modelName, true)}.ts`, generateReadAllOperation(modelName));
 await saveFile("src/operations", `get${pascalCase(modelName, true)}.test.ts`, generateReadAllTest(modelName));
