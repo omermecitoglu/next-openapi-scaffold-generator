@@ -54,10 +54,10 @@ if (modelName && firstField) {
   await saveFile(`src/app/${kebabCase(modelName, true)}`, "route.ts", generateApiRoute(modelName));
   await saveFile(`src/app/${kebabCase(modelName, true)}/[id]`, "route.ts", generateApiRouteWithId(modelName));
   if (orm === "drizzle") {
-    await saveFile("src/database/schema", `${kebabCase(modelName, true)}.ts`, generateSchema(modelName));
+    await saveFile("src/database/schema", `${kebabCase(modelName, true)}.ts`, generateSchema(modelName, firstField));
     await appendFile("src/database/schema", "index.ts", `export * from "./${kebabCase(modelName, true)}";`);
   }
-  await saveFile("src/models", `${kebabCase(modelName, false)}.ts`, generateModel(modelName));
+  await saveFile("src/models", `${kebabCase(modelName, false)}.ts`, generateModel(modelName, firstField));
   await saveFile("src/operations", `get${pascalCase(modelName, true)}.ts`, generateReadAllOperation(modelName));
   await saveFile("src/operations", `create${pascalCase(modelName, false)}.ts`, generateCreateOperation(modelName));
   await saveFile("src/operations", `get${pascalCase(modelName, false)}.ts`, generateReadOperation(modelName));
@@ -67,7 +67,7 @@ if (modelName && firstField) {
     await saveFile("src/operations", `get${pascalCase(modelName, true)}.test.ts`, generateReadAllTest(modelName));
     await saveFile("src/operations", `create${pascalCase(modelName, false)}.test.ts`, generateCreateTest(modelName));
     await saveFile("src/operations", `get${pascalCase(modelName, false)}.test.ts`, generateReadTest(modelName));
-    await saveFile("src/operations", `update${pascalCase(modelName, false)}.test.ts`, generateUpdateTest(modelName));
+    await saveFile("src/operations", `update${pascalCase(modelName, false)}.test.ts`, generateUpdateTest(modelName, firstField));
     await saveFile("src/operations", `delete${pascalCase(modelName, false)}.test.ts`, generateDeleteTest(modelName));
   }
 }

@@ -3,6 +3,7 @@ import { bigint, boolean, char, index, integer, pgTable, smallint, text, timesta
 
 export const {{ camelCasePlural }} = pgTable("{{ snakeCasePlural }}", {
   id: uuid("id").defaultRandom().primaryKey(),
+  {{ firstField }}: text("{{ firstField }}").notNull(),
   // ...
   exampleInteger: integer("example_integer").notNull().default(2147483647),
   exampleSmallInt: smallint("example_small_int").notNull().default(32767),

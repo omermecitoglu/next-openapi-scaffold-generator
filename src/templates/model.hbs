@@ -4,6 +4,7 @@ import type z from "zod";
 
 const baseSchema = createInsertSchema({{ camelCasePlural }}, {
   id: schema => schema.id.readonly().describe("Unique identifier of the {{ noCaseSingular }}"),
+  {{ firstField }}: schema => schema.{{ firstField }}.describe("............"),
   // describe other fields here
   createdAt: schema => schema.createdAt.readonly().describe("Creation date of the {{ noCaseSingular }} as an ISO 8601 date string"),
   updatedAt: schema => schema.updatedAt.readonly().describe("Modification date of the {{ noCaseSingular }} as an ISO 8601 date string"),
@@ -23,6 +24,7 @@ export const {{ pascalCaseSingular }}PatchDTO = New{{ pascalCaseSingular }}DTO.p
 
 export function test{{ pascalCaseSingular }}Data() {
   return {
+    {{ firstField }}: "unknown",
     // add the required fields here
   } satisfies z.infer<typeof New{{ pascalCaseSingular }}DTO>;
 }

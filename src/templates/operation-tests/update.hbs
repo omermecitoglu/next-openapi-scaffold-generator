@@ -12,17 +12,17 @@ describe("update{{ pascalCaseSingular }}", () => {
 
   it("should fail when trying to update a nonexistent {{ noCaseSingular }}", async () => {
     const pseudo{{ pascalCaseSingular }}Id = crypto.randomUUID();
-    const result = await update{{ pascalCaseSingular }}(db, pseudo{{ pascalCaseSingular }}Id, test{{ pascalCaseSingular }}Data("new.email@example.com"));
+    const result = await update{{ pascalCaseSingular }}(db, pseudo{{ pascalCaseSingular }}Id, test{{ pascalCaseSingular }}Data());
     const { success } = schema.safeParse(result);
     expect(success).toBe(false);
   });
 
   it("should successfully update an existing {{ noCaseSingular }}", async () => {
     await db.transaction(async tx => {
-      const result = await update{{ pascalCaseSingular }}(tx, test{{ pascalCaseSingular }}ID, test{{ pascalCaseSingular }}Data("new.email@example.com"));
+      const result = await update{{ pascalCaseSingular }}(tx, test{{ pascalCaseSingular }}ID, { {{ firstField }}: "testing" });
       const { success } = schema.safeParse(result);
       expect(success).toBe(true);
-      expect(result?.email).toBe("new.email@example.com");
+      expect(result?.{{ firstField }}).toBe("testing");
     });
   });
 });
