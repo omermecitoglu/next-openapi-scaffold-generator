@@ -7,7 +7,7 @@ export default defineConfig({
   format: ["esm"],
   splitting: false,
   clean: true,
-  external: ["change-case", "pluralize", "handlebars"],
+  external: ["prompts", "change-case", "pluralize", "handlebars"],
   esbuildPlugins: [
     InlineImportPlugin({ filter: /\.hbs$/ }),
   ],
