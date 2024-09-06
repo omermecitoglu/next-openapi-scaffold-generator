@@ -20,6 +20,7 @@ const jestConfig: JestConfigWithTsJest = {
   transformIgnorePatterns: [
     "<rootDir>/node_modules/(?!change-case)",
   ],
+  collectCoverage: true,
 };
 
 export default jestConfig;
