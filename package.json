@@ -1,6 +1,6 @@
 {
   "name": "@omer-x/next-openapi-scaffold-generator",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Generates model, schema and API routes for CRUD operations",
   "keywords": [
     "next",
@@ -46,7 +46,6 @@
     "node": ">=14.8.0"
   },
   "scripts": {
-    "gh:release": "conventional-github-releaser -p angular",
     "test": "jest",
     "dev": "tsup --watch",
     "build": "tsup"
@@ -62,9 +61,9 @@
     "@types/node": "^22.5.0",
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
-    "conventional-github-releaser": "^3.1.5",
     "esbuild-plugin-inline-import": "^1.1.0",
     "eslint": "^8.57.0",
+    "semantic-release": "^24.1.2",
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "tsup": "^8.2.4",
