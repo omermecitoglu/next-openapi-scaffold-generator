@@ -57,7 +57,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@omer-x/eslint-config": "^1.0.7",
+    "@omer-x/eslint-config": "^2.1.2",
     "@types/node": "^22.5.0",
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
