@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
-import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+import { beforeEach, describe, expect, it, vitest } from "vitest";
 import { appendFile, saveFile } from "./file";
 
-jest.mock("node:fs/promises");
+vitest.mock("node:fs/promises");
 
 describe("File operations", () => {
   const directory = "testDir";
@@ -10,7 +10,7 @@ describe("File operations", () => {
   const content = "Hello, World!";
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   describe("saveFile", () => {

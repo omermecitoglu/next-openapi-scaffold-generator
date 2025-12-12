@@ -1,4 +1,4 @@
-import { expect, test } from "@jest/globals";
+import { expect, test } from "vitest";
 import { camelCase, capitalCase, kebabCase, noCase, pascalCase, snakeCase } from "./string";
 
 test("camelCase", () => {

@@ -46,7 +46,8 @@
     "node": ">=14.8.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest --coverage",
     "dev": "tsup --watch",
     "build": "tsup"
   },
@@ -58,15 +59,15 @@
   },
   "devDependencies": {
     "@omer-x/eslint-config": "^1.0.7",
-    "@types/node": "^22.5.0",
+    "@types/node": "^22.19.2",
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
+    "@vitest/coverage-v8": "^4.0.15",
     "esbuild-plugin-inline-import": "^1.1.0",
     "eslint": "^8.57.0",
     "semantic-release": "^24.1.2",
-    "ts-jest": "^29.2.4",
-    "ts-node": "^10.9.2",
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^4.0.15"
   }
 }
