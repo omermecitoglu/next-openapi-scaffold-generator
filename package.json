@@ -60,15 +60,15 @@
   },
   "devDependencies": {
     "@omer-x/eslint-config": "^2.2.6",
-    "@types/node": "^22.19.2",
+    "@types/node": "^25.0.1",
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
     "@vitest/coverage-v8": "^4.0.15",
     "esbuild-plugin-inline-import": "^1.1.0",
     "eslint": "^9.39.1",
-    "semantic-release": "^24.1.2",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
+    "semantic-release": "^25.0.2",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
     "vitest": "^4.0.15"
   }
 }
