@@ -1,5 +1,5 @@
-import { afterAll, beforeAll, describe, expect, it, type Mock, vi } from "vitest";
 import Handlebars from "handlebars";
+import { type Mock, afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import getTemplate from "./template";
 
 describe("getTemplate", () => {
@@ -13,7 +13,7 @@ describe("getTemplate", () => {
 
   afterAll(() => {
     handlebarsSpy.mockRestore();
-  })
+  });
 
   it("should compile the given template string", () => {
     const template = getTemplate(templateString);

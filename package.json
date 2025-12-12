@@ -46,6 +46,7 @@
     "node": ">=14.8.0"
   },
   "scripts": {
+    "lint": "eslint --flag unstable_native_nodejs_ts_config",
     "test": "vitest run --coverage",
     "test:watch": "vitest --coverage",
     "dev": "tsup --watch",
@@ -58,13 +59,13 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@omer-x/eslint-config": "^1.0.7",
+    "@omer-x/eslint-config": "^2.2.6",
     "@types/node": "^22.19.2",
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
     "@vitest/coverage-v8": "^4.0.15",
     "esbuild-plugin-inline-import": "^1.1.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.39.1",
     "semantic-release": "^24.1.2",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
