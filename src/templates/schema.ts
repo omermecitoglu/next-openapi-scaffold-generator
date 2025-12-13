@@ -6,15 +6,13 @@ type SchemaTemplate = {
   camelCasePlural: string,
   pascalCasePlural: string,
   snakeCasePlural: string,
-  firstField: string,
 };
 
-export default function generateSchema(modelName: string, firstField: string) {
+export default function generateSchema(modelName: string) {
   const template = getTemplate<SchemaTemplate>(handleBarsTemplate);
   return template({
     camelCasePlural: camelCase(modelName, true),
     pascalCasePlural: pascalCase(modelName, true),
     snakeCasePlural: snakeCase(modelName, true),
-    firstField,
   });
 }

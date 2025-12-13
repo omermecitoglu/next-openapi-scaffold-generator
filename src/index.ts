@@ -34,13 +34,6 @@ const { orm } = await prompts({
   initial: 0,
 });
 
-const { firstField } = await prompts({
-  type: "text",
-  name: "firstField",
-  message: "Enter name of the first field",
-  initial: "name",
-});
-
 const { operationTests } = await prompts({
   type: "toggle",
   name: "operationTests",
@@ -50,18 +43,18 @@ const { operationTests } = await prompts({
   inactive: "no",
 });
 
-if (modelName && firstField) {
+if (modelName) {
   await saveFile(`src/app/${kebabCase(modelName, true)}`, "route.ts", generateApiRoute(modelName));
   await saveFile(`src/app/${kebabCase(modelName, true)}/[id]`, "route.ts", generateApiRouteWithId(modelName));
   if (orm === "drizzle") {
-    await saveFile("src/database/schema", `${kebabCase(modelName, true)}.ts`, generateSchema(modelName, firstField));
+    await saveFile("src/database/schema", `${kebabCase(modelName, true)}.ts`, generateSchema(modelName));
     const exportStatement = `export * from "./${kebabCase(modelName, true)}";`;
     const exported = await checkFile("src/database/schema", "index.ts", exportStatement);
     if (!exported) {
       await appendFile("src/database/schema", "index.ts", `export * from "./${kebabCase(modelName, true)}";`);
     }
   }
-  await saveFile("src/models", `${kebabCase(modelName, false)}.ts`, generateModel(modelName, firstField));
+  await saveFile("src/models", `${kebabCase(modelName, false)}.ts`, generateModel(modelName));
   await saveFile("src/operations", `get${pascalCase(modelName, true)}.ts`, generateReadAllOperation(modelName));
   await saveFile("src/operations", `create${pascalCase(modelName, false)}.ts`, generateCreateOperation(modelName));
   await saveFile("src/operations", `get${pascalCase(modelName, false)}.ts`, generateReadOperation(modelName));

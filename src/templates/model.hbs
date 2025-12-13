@@ -4,7 +4,6 @@ import type z from "zod";
 
 const baseSchema = createSelectSchema({{ camelCasePlural }}, {
   id: schema => schema.readonly().describe("Unique identifier of the {{ noCaseSingular }}"),
-  {{ firstField }}: schema => schema.describe("............"),
   // describe other fields here
   createdAt: schema => schema.readonly().describe("Creation date of the {{ noCaseSingular }} as an ISO 8601 date string"),
   updatedAt: schema => schema.readonly().describe("Modification date of the {{ noCaseSingular }} as an ISO 8601 date string"),

@@ -7,15 +7,13 @@ type ModelTemplate = {
   kebabCasePlural: string,
   noCaseSingular: string,
   pascalCaseSingular: string,
-  firstField: string,
 };
 
-export default function generateModel(modelName: string, firstField: string) {
+export default function generateModel(modelName: string) {
   return getTemplate<ModelTemplate>(handleBarsTemplate)({
     camelCasePlural: camelCase(modelName, true),
     kebabCasePlural: kebabCase(modelName, true),
     noCaseSingular: noCase(modelName, false),
     pascalCaseSingular: pascalCase(modelName, false),
-    firstField,
   });
 }
