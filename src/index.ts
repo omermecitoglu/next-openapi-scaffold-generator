@@ -67,7 +67,7 @@ if (modelName && firstField) {
     await saveFile("src/operations", `get${pascalCase(modelName, true)}.test.ts`, generateReadAllTest(modelName));
     await saveFile("src/operations", `create${pascalCase(modelName, false)}.test.ts`, generateCreateTest(modelName));
     await saveFile("src/operations", `get${pascalCase(modelName, false)}.test.ts`, generateReadTest(modelName));
-    await saveFile("src/operations", `update${pascalCase(modelName, false)}.test.ts`, generateUpdateTest(modelName, firstField));
+    await saveFile("src/operations", `update${pascalCase(modelName, false)}.test.ts`, generateUpdateTest(modelName));
     await saveFile("src/operations", `delete${pascalCase(modelName, false)}.test.ts`, generateDeleteTest(modelName));
   }
 }

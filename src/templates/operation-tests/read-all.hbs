@@ -1,15 +1,16 @@
-import { afterAll, expect, test } from "@jest/globals";
-import db, { evacuatePool } from "~/database";
-import { {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
+import { describe, expect, it, vi } from "vitest";
+import db from "~/database";
 import get{{ pascalCasePlural }} from "./get{{ pascalCasePlural }}";
 
-test("get{{ pascalCasePlural }}", async () => {
-  const result = await get{{ pascalCasePlural }}(db, ["id"]);
-  const schema = {{ pascalCaseSingular }}DTO.partial().array();
-  const { success } = schema.safeParse(result);
-  expect(success).toBe(true);
-});
+describe("get{{ pascalCasePlural }}", () => {
+  it("should retrieve all {{ noCasePlural }} from the database", async () => {
+    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-afterAll(done => {
-  evacuatePool().then(() => done());
+    await get{{ pascalCasePlural }}(db);
+
+    const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
+    expect((/^select (.+) from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}"/).test(query.text)).toBe(true);
+
+    spy.mockRestore();
+  });
 });

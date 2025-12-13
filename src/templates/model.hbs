@@ -21,10 +21,3 @@ export const New{{ pascalCaseSingular }}DTO = baseSchema.omit({
 
 export const {{ pascalCaseSingular }}PatchDTO = New{{ pascalCaseSingular }}DTO.partial().omit({
 }).describe("Data Transfer Object for updating an existing {{ noCaseSingular }}");
-
-export function test{{ pascalCaseSingular }}Data() {
-  return {
-    {{ firstField }}: "unknown",
-    // add the required fields here
-  } satisfies z.infer<typeof New{{ pascalCaseSingular }}DTO>;
-}

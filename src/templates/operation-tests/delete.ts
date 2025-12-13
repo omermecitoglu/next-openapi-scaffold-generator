@@ -1,20 +1,19 @@
-import { camelCase, kebabCase, noCase, pascalCase } from "~/core/string";
+import { kebabCase, noCase, pascalCase, snakeCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./delete.hbs";
 
 type DeleteTestTemplate = {
-  camelCaseSingular: string,
   kebabCaseSingular: string,
   noCaseSingular: string,
   pascalCaseSingular: string,
+  snakeCasePlural: string,
 };
 
 export default function generateDeleteTest(modelName: string) {
-  const template = getTemplate<DeleteTestTemplate>(handleBarsTemplate);
-  return template({
-    camelCaseSingular: camelCase(modelName, false),
+  return getTemplate<DeleteTestTemplate>(handleBarsTemplate)({
     kebabCaseSingular: kebabCase(modelName, false),
     noCaseSingular: noCase(modelName, false),
     pascalCaseSingular: pascalCase(modelName, false),
+    snakeCasePlural: snakeCase(modelName, true),
   });
 }
