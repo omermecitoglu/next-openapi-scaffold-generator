@@ -1,23 +1,29 @@
-import { createInsertSchema } from "drizzle-zod";
+import { createSelectSchema } from "drizzle-zod";
 import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
 import type z from "zod";
 
-const baseSchema = createInsertSchema({{ camelCasePlural }}, {
-  id: schema => schema.id.readonly().describe("Unique identifier of the {{ noCaseSingular }}"),
-  {{ firstField }}: schema => schema.{{ firstField }}.describe("............"),
+const baseSchema = createSelectSchema({{ camelCasePlural }}, {
+  id: schema => schema.readonly().describe("Unique identifier of the {{ noCaseSingular }}"),
+  {{ firstField }}: schema => schema.describe("............"),
   // describe other fields here
-  createdAt: schema => schema.createdAt.readonly().describe("Creation date of the {{ noCaseSingular }} as an ISO 8601 date string"),
-  updatedAt: schema => schema.updatedAt.readonly().describe("Modification date of the {{ noCaseSingular }} as an ISO 8601 date string"),
+  createdAt: schema => schema.readonly().describe("Creation date of the {{ noCaseSingular }} as an ISO 8601 date string"),
+  updatedAt: schema => schema.readonly().describe("Modification date of the {{ noCaseSingular }} as an ISO 8601 date string"),
 });
 
-export const {{ pascalCaseSingular }}DTO = baseSchema.required()
+export const {{ pascalCaseSingular }}Schema = baseSchema
   .describe("Represents a {{ noCaseSingular }} definition");
 
-export const New{{ pascalCaseSingular }}DTO = baseSchema.omit({
+export type {{ pascalCaseSingular }}DTO = z.infer<typeof {{ pascalCaseSingular }}Schema>;
+
+export const New{{ pascalCaseSingular }}Schema = baseSchema.omit({
   id: true,
   createdAt: true,
   updatedAt: true,
 }).describe("Data Transfer Object for creating a new {{ noCaseSingular }}");
 
-export const {{ pascalCaseSingular }}PatchDTO = New{{ pascalCaseSingular }}DTO.partial().omit({
+export type New{{ pascalCaseSingular }}DTO = z.infer<typeof New{{ pascalCaseSingular }}Schema>;
+
+export const {{ pascalCaseSingular }}PatchSchema = New{{ pascalCaseSingular }}Schema.partial().omit({
 }).describe("Data Transfer Object for updating an existing {{ noCaseSingular }}");
+
+export type {{ pascalCaseSingular }}PatchDTO = z.infer<typeof {{ pascalCaseSingular }}PatchSchema>;

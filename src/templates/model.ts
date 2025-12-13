@@ -11,8 +11,7 @@ type ModelTemplate = {
 };
 
 export default function generateModel(modelName: string, firstField: string) {
-  const template = getTemplate<ModelTemplate>(handleBarsTemplate);
-  return template({
+  return getTemplate<ModelTemplate>(handleBarsTemplate)({
     camelCasePlural: camelCase(modelName, true),
     kebabCasePlural: kebabCase(modelName, true),
     noCaseSingular: noCase(modelName, false),
