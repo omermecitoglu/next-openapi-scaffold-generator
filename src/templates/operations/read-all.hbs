@@ -5,7 +5,7 @@ import type { z } from "zod";
 
 const selectSchema = {{ pascalCaseSingular }}DTO.keyof().array().default([]);
 
-export default function get{{ pascalCasePlural }}(db: typeof database, select: z.infer<typeof selectSchema>) {
+export default function get{{ pascalCasePlural }}(db: Omit<typeof database, "$client">, select: z.infer<typeof selectSchema>) {
   return db.query.{{ camelCasePlural }}.findMany({
     columns: selectColumns(select),
     orderBy: (u, { asc }) => [asc(u.createdAt)],

@@ -3,7 +3,7 @@ import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
 import type { New{{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
 import type z from "zod";
 
-export default async function create{{ pascalCaseSingular }}(db: typeof database, data: z.infer<typeof New{{ pascalCaseSingular }}DTO>) {
+export default async function create{{ pascalCaseSingular }}(db: Omit<typeof database, "$client">, data: z.infer<typeof New{{ pascalCaseSingular }}DTO>) {
   const [{{ camelCaseSingular }}] = await db.insert({{ camelCasePlural }}).values(data).returning({ id: {{ camelCasePlural }}.id });
   return {{ camelCaseSingular }};
 }
