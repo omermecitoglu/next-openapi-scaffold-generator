@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import prompts from "prompts";
-import { appendFile, saveFile } from "./core/file";
+import { appendFile, checkFile, saveFile } from "./core/file";
 import { kebabCase, pascalCase } from "./core/string";
 import generateApiRoute from "./templates/api-route";
 import generateApiRouteWithId from "./templates/api-route-with-id";
@@ -55,7 +55,11 @@ if (modelName && firstField) {
   await saveFile(`src/app/${kebabCase(modelName, true)}/[id]`, "route.ts", generateApiRouteWithId(modelName));
   if (orm === "drizzle") {
     await saveFile("src/database/schema", `${kebabCase(modelName, true)}.ts`, generateSchema(modelName, firstField));
-    await appendFile("src/database/schema", "index.ts", `export * from "./${kebabCase(modelName, true)}";`);
+    const exportStatement = `export * from "./${kebabCase(modelName, true)}";`;
+    const exported = await checkFile("src/database/schema", "index.ts", exportStatement);
+    if (!exported) {
+      await appendFile("src/database/schema", "index.ts", `export * from "./${kebabCase(modelName, true)}";`);
+    }
   }
   await saveFile("src/models", `${kebabCase(modelName, false)}.ts`, generateModel(modelName, firstField));
   await saveFile("src/operations", `get${pascalCase(modelName, true)}.ts`, generateReadAllOperation(modelName));
