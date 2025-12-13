@@ -10,8 +10,7 @@ type DeleteOperationTemplate = {
 };
 
 export default function generateDeleteOperation(modelName: string) {
-  const template = getTemplate<DeleteOperationTemplate>(handleBarsTemplate);
-  return template({
+  return getTemplate<DeleteOperationTemplate>(handleBarsTemplate)({
     camelCasePlural: camelCase(modelName, true),
     camelCaseSingular: camelCase(modelName, false),
     kebabCasePlural: kebabCase(modelName, true),

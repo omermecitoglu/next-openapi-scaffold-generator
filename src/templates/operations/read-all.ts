@@ -10,8 +10,7 @@ type ReadAllOperationTemplate = {
 };
 
 export default function generateReadAllOperation(modelName: string) {
-  const template = getTemplate<ReadAllOperationTemplate>(handleBarsTemplate);
-  return template({
+  return getTemplate<ReadAllOperationTemplate>(handleBarsTemplate)({
     camelCasePlural: camelCase(modelName, true),
     kebabCaseSingular: kebabCase(modelName, false),
     pascalCasePlural: pascalCase(modelName, true),

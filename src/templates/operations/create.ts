@@ -11,8 +11,7 @@ type CreateOperationTemplate = {
 };
 
 export default function generateCreateOperation(modelName: string) {
-  const template = getTemplate<CreateOperationTemplate>(handleBarsTemplate);
-  return template({
+  return getTemplate<CreateOperationTemplate>(handleBarsTemplate)({
     camelCasePlural: camelCase(modelName, true),
     camelCaseSingular: camelCase(modelName, false),
     kebabCasePlural: kebabCase(modelName, true),

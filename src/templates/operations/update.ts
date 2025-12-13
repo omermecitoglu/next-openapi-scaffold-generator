@@ -11,8 +11,7 @@ type UpdateOperationTemplate = {
 };
 
 export default function generateUpdateOperation(modelName: string) {
-  const template = getTemplate<UpdateOperationTemplate>(handleBarsTemplate);
-  return template({
+  return getTemplate<UpdateOperationTemplate>(handleBarsTemplate)({
     camelCasePlural: camelCase(modelName, true),
     camelCaseSingular: camelCase(modelName, false),
     kebabCasePlural: kebabCase(modelName, true),

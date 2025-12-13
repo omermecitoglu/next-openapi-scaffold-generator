@@ -9,8 +9,7 @@ type ReadOperationTemplate = {
 };
 
 export default function generateReadOperation(modelName: string) {
-  const template = getTemplate<ReadOperationTemplate>(handleBarsTemplate);
-  return template({
+  return getTemplate<ReadOperationTemplate>(handleBarsTemplate)({
     camelCasePlural: camelCase(modelName, true),
     camelCaseSingular: camelCase(modelName, false),
     pascalCaseSingular: pascalCase(modelName, false),
