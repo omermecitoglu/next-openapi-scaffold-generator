@@ -1,8 +1,8 @@
 import type database from "~/database";
-import { type {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
+import { type {{ pascalCaseSingular }} } from "~/models/{{ kebabCaseSingular }}";
 import selectColumns from "~/utils/column";
 
-export default function get{{ pascalCasePlural }}(db: Omit<typeof database, "$client">, select: (keyof {{ pascalCaseSingular }}DTO)[] = []) {
+export default function get{{ pascalCasePlural }}(db: Omit<typeof database, "$client">, select: (keyof {{ pascalCaseSingular }})[] = []) {
   return db.query.{{ camelCasePlural }}.findMany({
     columns: selectColumns(select),
     orderBy: (u, { asc }) => [asc(u.createdAt)],
