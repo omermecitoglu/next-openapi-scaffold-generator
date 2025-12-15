@@ -8,7 +8,7 @@ export const { PATCH } = defineRoute({
   requestBody: {{ pascalCaseSingular }}PatchDTO,
   action: async ({ pathParams, body }) => {
     const {{ camelCaseSingular }} = await update{{ pascalCaseSingular }}(db, pathParams.id, body);
-    if ({{ camelCaseSingular }}?.id === pathParams.id) {
+    if ({{ camelCaseSingular }}.id === pathParams.id) {
       return Response.json({{ camelCaseSingular }});
     }
     return new Response(null, { status: 404 });
