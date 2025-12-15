@@ -14,7 +14,7 @@ export const {{ camelCasePlural }} = pgTable("{{ snakeCasePlural }}", {
   examplechar: char({ length: 16 }).notNull().default("hello world "),
   // ...
   createdAt: timestamp({ mode: "string", withTimezone: true, precision: 3 }).notNull().defaultNow(),
-  updatedAt: timestamp({ mode: "string", withTimezone: true, precision: 3 }).notNull().defaultNow(),
+  updatedAt: timestamp({ mode: "string", withTimezone: true, precision: 3 }).notNull().defaultNow().$onUpdate(() => sql`now()`),
 }, table => ({
   createdAtIdx: index().on(table.createdAt),
 }));
