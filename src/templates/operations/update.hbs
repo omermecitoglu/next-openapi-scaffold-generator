@@ -4,9 +4,9 @@ import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
 import { type {{ pascalCaseSingular }}Patch } from "~/models/{{ kebabCaseSingular }}";
 
 export default async function update{{ pascalCaseSingular }}(db: Omit<typeof database, "$client">, {{ camelCaseSingular }}Id: string, patch: {{ pascalCaseSingular }}Patch) {
-  const results = await db.update({{ camelCasePlural }})
+  const [updated{{ pascalCaseSingular }}] = await db.update({{ camelCasePlural }})
     .set(patch)
     .where(eq({{ camelCasePlural }}.id, {{ camelCaseSingular }}Id))
     .returning();
-  return results.shift();
+  return updated{{ pascalCaseSingular }};
 }
