@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { New{{ pascalCaseSingular }}Schema } from "~/models/{{ kebabCaseSingular }}";
+import { New{{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
 import create{{ pascalCaseSingular }} from "./create{{ pascalCaseSingular }}";
 
 describe("create{{ pascalCaseSingular }}", () => {
   it("should insert a {{ noCaseSingular }} into the database", async () => {
-    const mockData = zocker(New{{ pascalCaseSingular }}Schema).generate();
+    const mockData = zocker(New{{ pascalCaseSingular }}DTO).generate();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
     await create{{ pascalCaseSingular }}(db, mockData);

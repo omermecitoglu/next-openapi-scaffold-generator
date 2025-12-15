@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { {{ pascalCaseSingular }}Schema } from "~/models/{{ kebabCaseSingular }}";
+import { {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
 import delete{{ pascalCaseSingular }} from "./delete{{ pascalCaseSingular }}";
 
 describe("delete{{ pascalCaseSingular }}", () => {
   it("should delete a {{ noCaseSingular }} from the database", async () => {
-    const mockData = zocker({{ pascalCaseSingular }}Schema.pick({ id: true })).generate();
+    const mockData = zocker({{ pascalCaseSingular }}DTO.pick({ id: true })).generate();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
     await delete{{ pascalCaseSingular }}(db, mockData.id);

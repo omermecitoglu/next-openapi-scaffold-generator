@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { {{ pascalCaseSingular }}PatchSchema, {{ pascalCaseSingular }}Schema } from "~/models/{{ kebabCaseSingular }}";
+import { {{ pascalCaseSingular }}PatchDTO, {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
 import update{{ pascalCaseSingular }} from "./update{{ pascalCaseSingular }}";
 
 describe("update{{ pascalCaseSingular }}", () => {
   it("should update a {{ noCaseSingular }} in the database", async () => {
-    const mockData = zocker({{ pascalCaseSingular }}Schema.pick({ id: true })).generate();
-    const mockPatch = zocker({{ pascalCaseSingular }}PatchSchema).generate();
+    const mockData = zocker({{ pascalCaseSingular }}DTO.pick({ id: true })).generate();
+    const mockPatch = zocker({{ pascalCaseSingular }}PatchDTO).generate();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
     await update{{ pascalCaseSingular }}(db, mockData.id, mockPatch);
