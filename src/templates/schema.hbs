@@ -2,19 +2,19 @@ import { relations, sql } from "drizzle-orm";
 import { bigint, boolean, char, index, integer, pgTable, smallint, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const {{ camelCasePlural }} = pgTable("{{ snakeCasePlural }}", {
-  id: uuid("id").defaultRandom().primaryKey(),
+  id: uuid().defaultRandom().primaryKey(),
   // ...
-  exampleInteger: integer("example_integer").notNull().default(2147483647),
-  exampleSmallInt: smallint("example_small_int").notNull().default(32767),
-  exampleBigInt: bigint("example_big_int", { mode: "number" }).notNull().default(Number.MAX_SAFE_INTEGER),
-  exampleBiggerInt: bigint("example_bigger_int", { mode: "bigint" }).notNull().default(0n),
-  exampleBoolean: boolean("example_boolean").notNull().default(false),
-  exampleText: text("example_text").notNull().default("Lorem ipsum dolor sit amet"),
-  exampleVarchar: varchar("example_varchar", { length: 16 }).notNull().default("hello world"),
-  examplechar: char("example_char", { length: 16 }).notNull().default("hello world "),
+  exampleInteger: integer().notNull().default(2147483647),
+  exampleSmallInt: smallint().notNull().default(32767),
+  exampleBigInt: bigint({ mode: "number" }).notNull().default(Number.MAX_SAFE_INTEGER),
+  exampleBiggerInt: bigint({ mode: "bigint" }).notNull().default(0n),
+  exampleBoolean: boolean().notNull().default(false),
+  exampleText: text().notNull().default("Lorem ipsum dolor sit amet"),
+  exampleVarchar: varchar({ length: 16 }).notNull().default("hello world"),
+  examplechar: char({ length: 16 }).notNull().default("hello world "),
   // ...
-  createdAt: timestamp("created_at", { withTimezone: true, precision: 3 }).default(sql`CURRENT_TIMESTAMP`).notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true, precision: 3 }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  createdAt: timestamp({ mode: "string", withTimezone: true, precision: 3 }).notNull().defaultNow(),
+  updatedAt: timestamp({ mode: "string", withTimezone: true, precision: 3 }).notNull().defaultNow(),
 }, table => ({
   createdAtIdx: index().on(table.createdAt),
 }));
