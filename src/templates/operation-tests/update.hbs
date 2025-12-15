@@ -5,9 +5,18 @@ import { {{ pascalCaseSingular }}PatchDTO, {{ pascalCaseSingular }}DTO } from "~
 import update{{ pascalCaseSingular }} from "./update{{ pascalCaseSingular }}";
 
 describe("update{{ pascalCaseSingular }}", () => {
+  function generateMockPatch() {
+    const zock = zocker(CharacterPatchDTO);
+    let mock: ReturnType<typeof zock.generate>;
+    do {
+      mock = zock.generate();
+    } while (Object.values(JSON.parse(JSON.stringify(mock))).length < 1); // because .set(patch) might throw "No values to set"
+    return mock;
+  }
+
   it("should update a {{ noCaseSingular }} in the database", async () => {
     const mockData = zocker({{ pascalCaseSingular }}DTO.pick({ id: true })).generate();
-    const mockPatch = zocker({{ pascalCaseSingular }}PatchDTO).generate();
+    const mockPatch = generateMockPatch();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
     await update{{ pascalCaseSingular }}(db, mockData.id, mockPatch);
