@@ -15,9 +15,9 @@ export const {{ camelCasePlural }} = pgTable("{{ snakeCasePlural }}", {
   // ...
   createdAt: timestamp({ mode: "string", withTimezone: true, precision: 3 }).notNull().defaultNow(),
   updatedAt: timestamp({ mode: "string", withTimezone: true, precision: 3 }).notNull().defaultNow().$onUpdate(() => sql`now()`),
-}, table => ({
-  createdAtIdx: index().on(table.createdAt),
-}));
+}, table => [
+  index().on(table.createdAt),
+]);
 
 export const relationsOf{{ pascalCasePlural }} = relations({{ camelCasePlural }}, ({ many, one }) => ({
   master: one(masters, {

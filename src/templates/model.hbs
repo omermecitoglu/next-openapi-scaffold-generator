@@ -18,7 +18,6 @@ export const New{{ pascalCaseSingular }}DTO = baseSchema.omit({
   updatedAt: true,
 }).describe("Data Transfer Object for creating a new {{ noCaseSingular }}");
 
-
 export const {{ pascalCaseSingular }}PatchDTO = New{{ pascalCaseSingular }}DTO.partial().omit({
 }).describe("Data Transfer Object for updating an existing {{ noCaseSingular }}");
 
