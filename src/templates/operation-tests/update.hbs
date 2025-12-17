@@ -6,7 +6,7 @@ import update{{ pascalCaseSingular }} from "./update{{ pascalCaseSingular }}";
 
 describe("update{{ pascalCaseSingular }}", () => {
   function generateMockPatch() {
-    const zock = zocker(CharacterPatchDTO);
+    const zock = zocker({{ pascalCaseSingular }}PatchDTO);
     let mock: ReturnType<typeof zock.generate>;
     do {
       mock = zock.generate();
