@@ -5,11 +5,13 @@ export const { GET } = defineRoute({
   description: "Retrieve a list of {{ noCasePlural }}",
   tags: ["{{ capitalCasePlural }}"],
   queryParams: z.object({
+    offset: z.int32().min(0),
+    limit: z.int32().min(0),
     select: {{ pascalCaseSingular }}DTO.keyof().array().default([])
       .describe("List of the column names"),
   }),
   action: async ({ queryParams }) => {
-    return Response.json(await get{{ pascalCasePlural }}(db, queryParams.select));
+    return Response.json(await get{{ pascalCasePlural }}(db, queryParams));
   },
   responses: {
     200: { description: "Returns a list of {{ noCasePlural }}", content: {{ pascalCaseSingular }}DTO, isArray: true },

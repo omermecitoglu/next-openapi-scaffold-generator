@@ -2,9 +2,18 @@ import type database from "~/database";
 import { type {{ pascalCaseSingular }} } from "~/models/{{ kebabCaseSingular }}";
 import selectColumns from "~/utils/column";
 
-export default function get{{ pascalCasePlural }}(db: Omit<typeof database, "$client">, select: (keyof {{ pascalCaseSingular }})[] = []) {
+type Options = {
+  offset?: number,
+  limit?: number,
+  select?: (keyof {{ pascalCaseSingular }})[],
+};
+
+export default function get{{ pascalCasePlural }}(db: Omit<typeof database, "$client">, options: Options = {}) {
+  const { offset, limit, select } = options;
   return db.query.{{ camelCasePlural }}.findMany({
-    columns: selectColumns(select),
+    columns: selectColumns(select ?? []),
     orderBy: (u, { asc }) => [asc(u.createdAt)],
+    limit,
+    offset,
   });
 }
