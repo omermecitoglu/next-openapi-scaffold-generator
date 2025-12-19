@@ -13,7 +13,8 @@ describe("create{{ pascalCaseSingular }}", () => {
 
     expect(spy).toHaveBeenCalled();
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    expect(query.text.startsWith('insert into "{{ snakeCasePlural }}"')).toBe(true);
+    const q = /^insert into "{{ snakeCasePlural }}" (.+) values (.+) returning (.+)$/;
+    expect(q.test(query.text)).toBe(true);
     expect(parameters).toEqual(Object.values(mockData));
 
     spy.mockRestore();

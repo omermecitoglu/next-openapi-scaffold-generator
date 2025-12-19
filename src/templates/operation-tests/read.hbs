@@ -12,8 +12,8 @@ describe("get{{ pascalCaseSingular }}", () => {
     await get{{ pascalCaseSingular }}(db, mockData.id);
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const qMatch = (/^select (.+) from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}" where "{{ snakeCasePlural }}"\."id" = \$1 limit \$2$/).test(query.text);
-    expect(qMatch).toBe(true);
+    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}" where "{{ snakeCasePlural }}"\."id" = \$1 limit \$2$/;
+    expect(q.test(query.text)).toBe(true);
     expect(parameters).toEqual([...Object.values(mockData), 1]);
 
     spy.mockRestore();

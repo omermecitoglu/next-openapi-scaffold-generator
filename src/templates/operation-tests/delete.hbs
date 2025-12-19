@@ -12,8 +12,9 @@ describe("delete{{ pascalCaseSingular }}", () => {
     await delete{{ pascalCaseSingular }}(db, mockData.id);
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    expect(query.text).toBe('delete from "{{ snakeCasePlural }}" where "{{ snakeCasePlural }}"."id" = $1 returning "id"');
-    expect(parameters).toEqual(Object.values(mockData));
+    const q = /^delete from "{{ snakeCasePlural }}" where "{{ snakeCasePlural }}"."id" = \$1 returning (.+)$/;
+    expect(q.test(query.text)).toBe(true);
+    expect(parameters).toEqual([mockData.id]);
 
     spy.mockRestore();
   });

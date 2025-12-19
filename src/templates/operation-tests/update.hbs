@@ -23,7 +23,8 @@ describe("update{{ pascalCaseSingular }}", () => {
 
     expect(spy).toHaveBeenCalled();
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    expect(query.text.startsWith('update "{{ snakeCasePlural }}"')).toBe(true);
+    const q = /^update "{{ snakeCasePlural }}" set (.+) where (.+) returning (.+)$/;
+    expect(q.test(query.text)).toBe(true);
     expect(parameters).toEqual([
       ...Object.values(mockPatch).filter(p => typeof p !== "undefined"),
       mockData.id,

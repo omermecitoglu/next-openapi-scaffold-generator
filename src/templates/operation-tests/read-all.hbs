@@ -9,7 +9,38 @@ describe("get{{ pascalCasePlural }}", () => {
     await get{{ pascalCasePlural }}(db);
 
     const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    expect((/^select (.+) from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}"/).test(query.text)).toBe(true);
+    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}" order by "{{ snakeCasePlural }}"."created_at" asc$/;
+    expect(q.test(query.text)).toBe(true);
+
+    spy.mockRestore();
+  });
+
+  it("should retrieve {{ noCasePlural }} with limit and offset", async () => {
+    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
+
+    await get{{ pascalCasePlural }}(db, {
+      limit: 50,
+      offset: 50,
+    });
+
+    const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
+    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}" order by "{{ snakeCasePlural }}"."created_at" asc limit \$1 offset \$2$/;
+    expect(q.test(query.text)).toBe(true);
+    expect(parameters).toEqual([50, 50]);
+
+    spy.mockRestore();
+  });
+
+  it("should retrieve {{ noCasePlural }} with specific fields selected", async () => {
+    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
+
+    await get{{ pascalCasePlural }}(db, {
+      select: ["id", "createdAt"],
+    });
+
+    const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
+    const q = /^select "id", "created_at" from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}" order by "{{ snakeCasePlural }}"."created_at" asc$/;
+    expect(q.test(query.text)).toBe(true);
 
     spy.mockRestore();
   });
