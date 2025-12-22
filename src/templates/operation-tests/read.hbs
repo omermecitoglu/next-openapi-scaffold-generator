@@ -13,7 +13,7 @@ describe("get{{ pascalCaseSingular }}", () => {
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
     const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ snakeCasePlural }}" where "{{ snakeCasePlural }}"\."id" = \$1 limit \$2$/;
-    expect(q.test(query.text)).toBe(true);
+    expect(query.text).toMatch(q);
     expect(parameters).toEqual([...Object.values(mockData), 1]);
 
     spy.mockRestore();
