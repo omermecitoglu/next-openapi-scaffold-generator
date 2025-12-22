@@ -11,9 +11,33 @@ export const { GET } = defineRoute({
       .describe("List of the column names"),
   }),
   action: async ({ queryParams }) => {
-    return Response.json(await get{{ pascalCasePlural }}(db, queryParams));
+    const [
+      [total],
+      items,
+    ] = await Promise.all([
+      db.select({ count: count() }).from({{ camelCasePlural }}),
+      get{{ pascalCasePlural }}(db, queryParams),
+    ]);
+    return Response.json({
+      items,
+      pagination: {
+        offset: queryParams.offset,
+        limit: queryParams.limit,
+        total: total.count,
+      },
+    });
   },
   responses: {
-    200: { description: "Returns a list of {{ noCasePlural }}", content: {{ pascalCaseSingular }}DTO, isArray: true },
+    200: {
+      description: "Returns a list of {{ noCasePlural }}",
+      content: z.object({
+        items: {{ pascalCaseSingular }}DTO.array(),
+        pagination: z.object({
+          offset: z.int32().min(0),
+          limit: z.int32().min(0),
+          total: z.int(),
+        }),
+      }),
+    },
   },
 });
