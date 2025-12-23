@@ -10,10 +10,25 @@ export const { GET } = defineRoute({
     if ({{ camelCaseSingular }}) {
       return Response.json({{ camelCaseSingular }});
     }
-    return new Response(null, { status: 404 });
+    return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+  },
+  handleErrors(errorType, issues) {
+    switch (errorType) {
+      case "PARSE_PATH_PARAMS":
+        return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+      default:
+        // eslint-disable-next-line no-console
+        console.log(`---------------[${errorType}]---------------`);
+        // eslint-disable-next-line no-console
+        console.log(issues);
+        // eslint-disable-next-line no-console
+        console.log("".padEnd(errorType.length + 32, "-"));
+        return Response.json({ errorCode: "UNKNOWN_ERROR" }, { status: 500 });
+    }
   },
   responses: {
     200: { description: "{{ onlyFirstCapitalCaseSingular }} found", content: {{ pascalCaseSingular }}DTO },
-    404: { description: "{{ onlyFirstCapitalCaseSingular }} not found" },
+    404: { description: "{{ onlyFirstCapitalCaseSingular }} not found", content: z.object({ errorCode: z.literal(["{{ constantCaseSingular }}_NOT_FOUND"]) }) },
+    500: { description: "Internal Server Error", content: z.object({ errorCode: z.literal(["UNKNOWN_ERROR"]) }) },
   },
 });

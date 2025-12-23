@@ -38,3 +38,8 @@ export function capitalCase(text: string, plural: boolean, onlyFirst: boolean) {
   }
   return changeCase.capitalCase(properText);
 }
+
+export function constantCase(text: string, plural: boolean) {
+  const properText = plural ? pluralize(text) : pluralize.singular(text);
+  return changeCase.constantCase(properText);
+}

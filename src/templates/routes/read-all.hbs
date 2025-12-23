@@ -27,6 +27,20 @@ export const { GET } = defineRoute({
       },
     });
   },
+  handleErrors(errorType, issues) {
+    switch (errorType) {
+      case "PARSE_SEARCH_PARAMS":
+        return Response.json({ errorCode: "BAD_REQUEST" }, { status: 400 });
+      default:
+        // eslint-disable-next-line no-console
+        console.log(`---------------[${errorType}]---------------`);
+        // eslint-disable-next-line no-console
+        console.log(issues);
+        // eslint-disable-next-line no-console
+        console.log("".padEnd(errorType.length + 32, "-"));
+        return Response.json({ errorCode: "UNKNOWN_ERROR" }, { status: 500 });
+    }
+  },
   responses: {
     200: {
       description: "Returns a list of {{ noCasePlural }}",
@@ -39,5 +53,7 @@ export const { GET } = defineRoute({
         }),
       }),
     },
+    400: { description: "Bad Request", content: z.object({ errorCode: z.literal(["BAD_REQUEST"]) }) },
+    500: { description: "Internal Server Error", content: z.object({ errorCode: z.literal(["UNKNOWN_ERROR"]) }) },
   },
 });

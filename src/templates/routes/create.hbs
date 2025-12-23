@@ -9,7 +9,23 @@ export const { POST } = defineRoute({
     const {{ camelCaseSingular }} = await create{{ pascalCaseSingular }}(db, body);
     return Response.json({{ camelCaseSingular }}, { status: 201 });
   },
+  handleErrors(errorType, issues) {
+    switch (errorType) {
+      case "PARSE_REQUEST_BODY":
+        return Response.json({ errorCode: "BAD_REQUEST" }, { status: 400 });
+      default:
+        // eslint-disable-next-line no-console
+        console.log(`---------------[${errorType}]---------------`);
+        // eslint-disable-next-line no-console
+        console.log(issues);
+        // eslint-disable-next-line no-console
+        console.log("".padEnd(errorType.length + 32, "-"));
+        return Response.json({ errorCode: "UNKNOWN_ERROR" }, { status: 500 });
+    }
+  },
   responses: {
     201: { description: "{{ onlyFirstCapitalCaseSingular }} created successfully", content: {{ pascalCaseSingular }}DTO },
+    400: { description: "Bad Request", content: z.object({ errorCode: z.literal(["BAD_REQUEST"]) }) },
+    500: { description: "Internal Server Error", content: z.object({ errorCode: z.literal(["UNKNOWN_ERROR"]) }) },
   },
 });
