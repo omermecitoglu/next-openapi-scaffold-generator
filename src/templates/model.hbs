@@ -1,24 +1,24 @@
-import { createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
 import type z from "zod";
 
-const baseSchema = createSelectSchema({{ camelCasePlural }}, {
+export const {{ pascalCaseSingular }}DTO = createSelectSchema({{ camelCasePlural }}, {
   id: schema => schema.readonly().describe("Unique identifier of the {{ noCaseSingular }}"),
   // describe other fields here
   createdAt: schema => schema.readonly().describe("Creation date of the {{ noCaseSingular }} as an ISO 8601 date string"),
   updatedAt: schema => schema.readonly().describe("Modification date of the {{ noCaseSingular }} as an ISO 8601 date string"),
-});
+}).describe("Represents a {{ noCaseSingular }} definition");
 
-export const {{ pascalCaseSingular }}DTO = baseSchema
-  .describe("Represents a {{ noCaseSingular }} definition");
-
-export const New{{ pascalCaseSingular }}DTO = baseSchema.omit({
+export const New{{ pascalCaseSingular }}DTO = createInsertSchema({{ camelCasePlural }}).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
 }).describe("Data Transfer Object for creating a new {{ noCaseSingular }}");
 
-export const {{ pascalCaseSingular }}PatchDTO = New{{ pascalCaseSingular }}DTO.partial().omit({
+export const {{ pascalCaseSingular }}PatchDTO = createUpdateSchema({{ camelCasePlural }}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
 }).describe("Data Transfer Object for updating an existing {{ noCaseSingular }}");
 
 export type {{ pascalCaseSingular }} = z.infer<typeof {{ pascalCaseSingular }}DTO>;
