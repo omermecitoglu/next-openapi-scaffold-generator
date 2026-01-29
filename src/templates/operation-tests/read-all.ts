@@ -1,9 +1,9 @@
-import { kebabCase, noCase, pascalCase, snakeCase } from "~/core/string";
+import { camelCase, kebabCase, noCase, pascalCase, snakeCase } from "~/core/string";
 import getTemplate from "~/core/template";
 import handleBarsTemplate from "./read-all.hbs";
 
 type ReadAllTestTemplate = {
-  kebabCasePlural: string,
+  camelCasePlural: string,
   kebabCaseSingular: string,
   noCasePlural: string,
   pascalCasePlural: string,
@@ -12,7 +12,7 @@ type ReadAllTestTemplate = {
 
 export default function generateReadAllTest(modelName: string) {
   return getTemplate<ReadAllTestTemplate>(handleBarsTemplate)({
-    kebabCasePlural: kebabCase(modelName, true),
+    camelCasePlural: camelCase(modelName, true),
     kebabCaseSingular: kebabCase(modelName, false),
     noCasePlural: noCase(modelName, true),
     pascalCasePlural: pascalCase(modelName, true),

@@ -12,7 +12,7 @@ describe("get{{ pascalCaseSingular }}", () => {
     await get{{ pascalCaseSingular }}(db, mockData.id);
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ kebabCasePlural }}" where "{{ kebabCasePlural }}"\."id" = \$1 limit \$2$/;
+    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ camelCasePlural }}" where "{{ camelCasePlural }}"\."id" = \$1 limit \$2$/;
     expect(query.text).toMatch(q);
     expect(parameters).toEqual([...Object.values(mockData), 1]);
 
