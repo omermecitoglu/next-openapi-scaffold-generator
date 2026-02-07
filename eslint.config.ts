@@ -7,6 +7,6 @@ export default [
     },
   },
   {
-    ignores: ["dist/*"],
+    ignores: ["bin/*"],
   },
 ];
