@@ -5,6 +5,7 @@ import { {{ pascalCaseSingular }}DTO, {{ pascalCaseSingular }}PatchDTO } from "~
 import delete{{ pascalCaseSingular }} from "~/operations/delete{{ pascalCaseSingular }}";
 import get{{ pascalCaseSingular }} from "~/operations/get{{ pascalCaseSingular }}";
 import update{{ pascalCaseSingular }} from "~/operations/update{{ pascalCaseSingular }}";
+import { prettyPrintUnhandledError } from "~/utils/error";
 
 {{{ readOperation }}}
 

@@ -17,12 +17,7 @@ export const { DELETE } = defineRoute({
       case "PARSE_PATH_PARAMS":
         return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
       default:
-        // eslint-disable-next-line no-console
-        console.log(`---------------[${errorType}]---------------`);
-        // eslint-disable-next-line no-console
-        console.log(issues);
-        // eslint-disable-next-line no-console
-        console.log("".padEnd(errorType.length + 32, "-"));
+        prettyPrintUnhandledError(errorType, issues);
         return Response.json({ errorCode: "UNKNOWN_ERROR" }, { status: 500 });
     }
   },

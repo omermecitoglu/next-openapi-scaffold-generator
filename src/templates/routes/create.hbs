@@ -14,12 +14,7 @@ export const { POST } = defineRoute({
       case "PARSE_REQUEST_BODY":
         return Response.json({ errorCode: "BAD_REQUEST" }, { status: 400 });
       default:
-        // eslint-disable-next-line no-console
-        console.log(`---------------[${errorType}]---------------`);
-        // eslint-disable-next-line no-console
-        console.log(issues);
-        // eslint-disable-next-line no-console
-        console.log("".padEnd(errorType.length + 32, "-"));
+        prettyPrintUnhandledError(errorType, issues);
         return Response.json({ errorCode: "UNKNOWN_ERROR" }, { status: 500 });
     }
   },

@@ -6,6 +6,7 @@ import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
 import { New{{ pascalCaseSingular }}DTO, {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
 import create{{ pascalCaseSingular }} from "~/operations/create{{ pascalCaseSingular }}";
 import get{{ pascalCasePlural }} from "~/operations/get{{ pascalCasePlural }}";
+import { prettyPrintUnhandledError } from "~/utils/error";
 
 {{{ readAllOperation }}}
 
