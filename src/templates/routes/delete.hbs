@@ -7,10 +7,10 @@ export const { DELETE } = defineRoute({
   pathParams: {{ pascalCaseSingular }}DTO.pick({ id: true }),
   action: async ({ pathParams }) => {
     const {{ camelCaseSingular }} = await delete{{ pascalCaseSingular }}(db, pathParams.id);
-    if ({{ camelCaseSingular }}?.id === pathParams.id) {
-      return new Response(null, { status: 204 });
+    if (!{{ camelCaseSingular }}) {
+      return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
     }
-    return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+    return new Response(null, { status: 204 });
   },
   handleErrors(errorType, issues) {
     switch (errorType) {

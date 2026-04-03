@@ -7,10 +7,10 @@ export const { GET } = defineRoute({
   pathParams: {{ pascalCaseSingular }}DTO.pick({ id: true }),
   action: async ({ pathParams }) => {
     const {{ camelCaseSingular }} = await get{{ pascalCaseSingular }}(db, pathParams.id);
-    if ({{ camelCaseSingular }}) {
-      return Response.json({{ camelCaseSingular }});
+    if (!{{ camelCaseSingular }}) {
+      return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
     }
-    return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+    return Response.json({{ camelCaseSingular }});
   },
   handleErrors(errorType, issues) {
     switch (errorType) {

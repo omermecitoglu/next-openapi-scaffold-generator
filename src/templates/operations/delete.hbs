@@ -6,5 +6,5 @@ export default async function delete{{ pascalCaseSingular }}(db: Omit<typeof dat
   const results = await db.delete({{ camelCasePlural }}).where(eq({{ camelCasePlural }}.id, {{ camelCaseSingular }}Id)).returning({
     id: {{ camelCasePlural }}.id,
   });
-  return results.shift();
+  return results.at(0);
 }
