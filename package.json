@@ -49,7 +49,7 @@
     "lint": "eslint --flag unstable_native_nodejs_ts_config",
     "test": "vitest run --coverage",
     "test:watch": "vitest --coverage",
-    "dev": "tsup --watch",
+    "dev": "concurrently \"tsup --watch\" \"chokidar 'src/**/*.hbs' -c 'touch src/index.ts'\"",
     "build": "tsup"
   },
   "dependencies": {
@@ -64,6 +64,8 @@
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
     "@vitest/coverage-v8": "^4.0.15",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.2.1",
     "esbuild-plugin-inline-import": "^1.1.0",
     "eslint": "^9.39.1",
     "semantic-release": "^25.0.2",
