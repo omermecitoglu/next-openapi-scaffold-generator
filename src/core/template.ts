@@ -2,9 +2,8 @@ import { camelCase, capitalCase, constantCase, kebabCase, noCase, pascalCase, se
 import Handlebars from "handlebars";
 import pluralize from "pluralize";
 
-export default function render<T>(input: string, params: T) {
-  const hbs = Handlebars.create();
-  hbs.registerHelper({
+export default function render<T>(input: string, params?: T) {
+  Handlebars.registerHelper({
     camelCase(text: string, form: "plural" | "singular") {
       return camelCase(form === "plural" ? pluralize(text) : pluralize.singular(text));
     },
@@ -30,5 +29,5 @@ export default function render<T>(input: string, params: T) {
       return sentenceCase(form === "plural" ? pluralize(text) : pluralize.singular(text));
     },
   });
-  return hbs.compile<T>(input)(params);
+  return Handlebars.compile<T>(input)(params ?? ({} as T));
 }
