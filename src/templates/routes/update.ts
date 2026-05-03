@@ -1,5 +1,5 @@
 import { camelCase, capitalCase, constantCase, noCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./update.hbs";
 
 type UpdateOperationRouteTemplate = {
@@ -12,8 +12,7 @@ type UpdateOperationRouteTemplate = {
 };
 
 export default function generateUpdateOperationRoute(modelName: string) {
-  const template = getTemplate<UpdateOperationRouteTemplate>(handleBarsTemplate);
-  return template({
+  return render<UpdateOperationRouteTemplate>(handleBarsTemplate, {
     camelCaseSingular: camelCase(modelName, false),
     capitalCasePlural: capitalCase(modelName, true, false),
     constantCaseSingular: constantCase(modelName, false),

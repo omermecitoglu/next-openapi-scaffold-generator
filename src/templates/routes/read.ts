@@ -1,5 +1,5 @@
 import { camelCase, capitalCase, constantCase, noCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./read.hbs";
 
 type ReadOperationRouteTemplate = {
@@ -12,8 +12,7 @@ type ReadOperationRouteTemplate = {
 };
 
 export default function generateReadOperationRoute(modelName: string) {
-  const template = getTemplate<ReadOperationRouteTemplate>(handleBarsTemplate);
-  return template({
+  return render<ReadOperationRouteTemplate>(handleBarsTemplate, {
     camelCaseSingular: camelCase(modelName, false),
     capitalCasePlural: capitalCase(modelName, true, false),
     constantCaseSingular: constantCase(modelName, false),

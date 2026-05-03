@@ -1,5 +1,5 @@
 import { kebabCase, noCase, pascalCase, snakeCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./update.hbs";
 
 type UpdateTestTemplate = {
@@ -10,7 +10,7 @@ type UpdateTestTemplate = {
 };
 
 export default function generateUpdateTest(modelName: string) {
-  return getTemplate<UpdateTestTemplate>(handleBarsTemplate)({
+  return render<UpdateTestTemplate>(handleBarsTemplate, {
     kebabCaseSingular: kebabCase(modelName, false),
     noCaseSingular: noCase(modelName, false),
     pascalCaseSingular: pascalCase(modelName, false),

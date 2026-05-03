@@ -1,5 +1,5 @@
 import { camelCase, kebabCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./api-route.hbs";
 import generateCreateOperationRoute from "./routes/create";
 import generateReadAllOperationRoute from "./routes/read-all";
@@ -15,8 +15,7 @@ type ApiRouteTemplate = {
 };
 
 export default function generateApiRoute(modelName: string) {
-  const template = getTemplate<ApiRouteTemplate>(handleBarsTemplate);
-  return template({
+  return render<ApiRouteTemplate>(handleBarsTemplate, {
     camelCasePlural: camelCase(modelName, true),
     kebabCasePlural: kebabCase(modelName, true),
     kebabCaseSingular: kebabCase(modelName, false),

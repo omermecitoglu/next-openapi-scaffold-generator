@@ -1,5 +1,5 @@
 import { camelCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./read.hbs";
 
 type ReadOperationTemplate = {
@@ -9,7 +9,7 @@ type ReadOperationTemplate = {
 };
 
 export default function generateReadOperation(modelName: string) {
-  return getTemplate<ReadOperationTemplate>(handleBarsTemplate)({
+  return render<ReadOperationTemplate>(handleBarsTemplate, {
     camelCasePlural: camelCase(modelName, true),
     camelCaseSingular: camelCase(modelName, false),
     pascalCaseSingular: pascalCase(modelName, false),

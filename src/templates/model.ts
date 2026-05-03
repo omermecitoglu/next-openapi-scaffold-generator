@@ -1,5 +1,5 @@
 import { camelCase, kebabCase, noCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./model.hbs";
 
 type ModelTemplate = {
@@ -10,7 +10,7 @@ type ModelTemplate = {
 };
 
 export default function generateModel(modelName: string) {
-  return getTemplate<ModelTemplate>(handleBarsTemplate)({
+  return render<ModelTemplate>(handleBarsTemplate, {
     camelCasePlural: camelCase(modelName, true),
     kebabCasePlural: kebabCase(modelName, true),
     noCaseSingular: noCase(modelName, false),

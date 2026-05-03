@@ -1,5 +1,5 @@
 import { kebabCase, noCase, pascalCase, snakeCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./delete.hbs";
 
 type DeleteTestTemplate = {
@@ -10,7 +10,7 @@ type DeleteTestTemplate = {
 };
 
 export default function generateDeleteTest(modelName: string) {
-  return getTemplate<DeleteTestTemplate>(handleBarsTemplate)({
+  return render<DeleteTestTemplate>(handleBarsTemplate, {
     kebabCaseSingular: kebabCase(modelName, false),
     noCaseSingular: noCase(modelName, false),
     pascalCaseSingular: pascalCase(modelName, false),

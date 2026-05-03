@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
 
-export default function getTemplate<T>(input: string) {
-  return Handlebars.compile<T>(input);
+export default function render<T>(input: string, params: T) {
+  return Handlebars.compile<T>(input)(params);
 }

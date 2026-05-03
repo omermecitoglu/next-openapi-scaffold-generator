@@ -1,5 +1,5 @@
 import { camelCase, pascalCase, snakeCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./schema.hbs";
 
 type SchemaTemplate = {
@@ -9,8 +9,7 @@ type SchemaTemplate = {
 };
 
 export default function generateSchema(modelName: string) {
-  const template = getTemplate<SchemaTemplate>(handleBarsTemplate);
-  return template({
+  return render<SchemaTemplate>(handleBarsTemplate, {
     camelCasePlural: camelCase(modelName, true),
     pascalCasePlural: pascalCase(modelName, true),
     snakeCasePlural: snakeCase(modelName, true),

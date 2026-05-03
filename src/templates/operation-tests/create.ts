@@ -1,5 +1,5 @@
 import { kebabCase, noCase, pascalCase, snakeCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./create.hbs";
 
 type CreateTestTemplate = {
@@ -10,7 +10,7 @@ type CreateTestTemplate = {
 };
 
 export default function generateCreateTest(modelName: string) {
-  return getTemplate<CreateTestTemplate>(handleBarsTemplate)({
+  return render<CreateTestTemplate>(handleBarsTemplate, {
     kebabCaseSingular: kebabCase(modelName, false),
     noCaseSingular: noCase(modelName, false),
     pascalCaseSingular: pascalCase(modelName, false),

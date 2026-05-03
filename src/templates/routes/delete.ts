@@ -1,5 +1,5 @@
 import { camelCase, capitalCase, constantCase, noCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./delete.hbs";
 
 type DeleteOperationRouteTemplate = {
@@ -12,8 +12,7 @@ type DeleteOperationRouteTemplate = {
 };
 
 export default function generateDeleteOperationRoute(modelName: string) {
-  const template = getTemplate<DeleteOperationRouteTemplate>(handleBarsTemplate);
-  return template({
+  return render<DeleteOperationRouteTemplate>(handleBarsTemplate, {
     camelCaseSingular: camelCase(modelName, false),
     capitalCasePlural: capitalCase(modelName, true, false),
     constantCaseSingular: constantCase(modelName, false),

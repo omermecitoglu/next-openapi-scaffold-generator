@@ -1,5 +1,5 @@
 import { camelCase, kebabCase, noCase, pascalCase, snakeCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./read.hbs";
 
 type ReadTestTemplate = {
@@ -11,7 +11,7 @@ type ReadTestTemplate = {
 };
 
 export default function generateReadTest(modelName: string) {
-  return getTemplate<ReadTestTemplate>(handleBarsTemplate)({
+  return render<ReadTestTemplate>(handleBarsTemplate, {
     camelCasePlural: camelCase(modelName, true),
     kebabCaseSingular: kebabCase(modelName, false),
     noCaseSingular: noCase(modelName, false),

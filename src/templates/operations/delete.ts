@@ -1,5 +1,5 @@
 import { camelCase, kebabCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./delete.hbs";
 
 type DeleteOperationTemplate = {
@@ -10,7 +10,7 @@ type DeleteOperationTemplate = {
 };
 
 export default function generateDeleteOperation(modelName: string) {
-  return getTemplate<DeleteOperationTemplate>(handleBarsTemplate)({
+  return render<DeleteOperationTemplate>(handleBarsTemplate, {
     camelCasePlural: camelCase(modelName, true),
     camelCaseSingular: camelCase(modelName, false),
     kebabCasePlural: kebabCase(modelName, true),

@@ -1,5 +1,5 @@
 import { camelCase, kebabCase, pascalCase } from "~/core/string";
-import getTemplate from "~/core/template";
+import render from "~/core/template";
 import handleBarsTemplate from "./create.hbs";
 
 type CreateOperationTemplate = {
@@ -11,7 +11,7 @@ type CreateOperationTemplate = {
 };
 
 export default function generateCreateOperation(modelName: string) {
-  return getTemplate<CreateOperationTemplate>(handleBarsTemplate)({
+  return render<CreateOperationTemplate>(handleBarsTemplate, {
     camelCasePlural: camelCase(modelName, true),
     camelCaseSingular: camelCase(modelName, false),
     kebabCasePlural: kebabCase(modelName, true),
