@@ -2,6 +2,8 @@ import type database from "~/database";
 
 export default function get{{ pascalCase modelName }}(db: Omit<typeof database, "$client">, {{ camelCase modelName }}Id: string) {
   return db.query.{{ camelCase modelName "plural" }}.findFirst({
-    where: (table, { eq }) => eq(table.id, {{ camelCase modelName }}Id),
+    where: {
+      id: {{ camelCase modelName }}Id,
+    },
   });
 }

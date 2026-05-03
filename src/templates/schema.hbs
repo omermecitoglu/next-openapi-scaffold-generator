@@ -1,7 +1,7 @@
-import { relations, sql } from "drizzle-orm";
-import { bigint, boolean, char, index, integer, pgTable, smallint, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { bigint, boolean, char, index, integer, smallint, snakeCase, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
-export const {{ camelCase modelName "plural" }} = pgTable("{{ snakeCase modelName "plural" }}", {
+export const {{ camelCase modelName "plural" }} = snakeCase.table("{{ snakeCase modelName "plural" }}", {
   id: uuid().defaultRandom().primaryKey(),
   // ...
   exampleInteger: integer().notNull().default(2147483647),
@@ -18,11 +18,3 @@ export const {{ camelCase modelName "plural" }} = pgTable("{{ snakeCase modelNam
 }, table => [
   index().on(table.createdAt),
 ]);
-
-export const relationsOf{{ pascalCase modelName "plural" }} = relations({{ camelCase modelName "plural" }}, ({ many, one }) => ({
-  master: one(masters, {
-    fields: [{{ camelCase modelName "plural" }}.masterId],
-    references: [masters.id],
-  }),
-  slaves: many(slaves),
-}));

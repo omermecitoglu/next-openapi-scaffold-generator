@@ -12,7 +12,9 @@ export default function get{{ pascalCase modelName "plural" }}(db: Omit<typeof d
   const { offset, limit, select } = options;
   return db.query.{{ camelCase modelName "plural" }}.findMany({
     columns: selectColumns(select ?? []),
-    orderBy: (u, { asc }) => [asc(u.createdAt)],
+    orderBy: {
+      createdAt: "asc",
+    },
     limit,
     offset,
   });

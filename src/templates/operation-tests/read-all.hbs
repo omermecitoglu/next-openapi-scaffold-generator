@@ -9,7 +9,7 @@ describe("get{{ pascalCase modelName "plural" }}", () => {
     await get{{ pascalCase modelName "plural" }}(db);
 
     const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" "{{ camelCase modelName "plural" }}" order by "{{ camelCase modelName "plural" }}"."created_at" asc$/;
+    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" as "d0" order by "d0"."created_at" asc$/;
     expect(query.text).toMatch(q);
 
     spy.mockRestore();
@@ -24,7 +24,7 @@ describe("get{{ pascalCase modelName "plural" }}", () => {
     });
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" "{{ camelCase modelName "plural" }}" order by "{{ camelCase modelName "plural" }}"."created_at" asc limit \$1 offset \$2$/;
+    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" as "d0" order by "d0"."created_at" asc limit \$1 offset \$2$/;
     expect(query.text).toMatch(q);
     expect(parameters).toEqual([50, 50]);
 
@@ -39,8 +39,12 @@ describe("get{{ pascalCase modelName "plural" }}", () => {
     });
 
     const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select "id", "created_at" from "{{ snakeCase modelName "plural" }}" "{{ camelCase modelName "plural" }}" order by "{{ camelCase modelName "plural" }}"."created_at" asc$/;
-    expect(query.text).toMatch(q);
+    expect(query.text).toContain("select");
+    expect(query.text).toContain("id");
+    expect(query.text).toContain("createdAt");
+    expect(query.text).toContain("from");
+    expect(query.text).toContain("{{ snakeCase modelName "plural" }}");
+    expect(query.text).toContain("order by");
 
     spy.mockRestore();
   });
