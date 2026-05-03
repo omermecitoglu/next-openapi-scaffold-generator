@@ -1,18 +1,18 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
-import delete{{ pascalCaseSingular }} from "./delete{{ pascalCaseSingular }}";
+import { {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import delete{{ pascalCase modelName }} from "./delete{{ pascalCase modelName }}";
 
-describe("delete{{ pascalCaseSingular }}", () => {
-  it("should delete a {{ noCaseSingular }} from the database", async () => {
-    const mockData = zocker({{ pascalCaseSingular }}DTO.pick({ id: true })).generate();
+describe("delete{{ pascalCase modelName }}", () => {
+  it("should delete a {{ noCase modelName }} from the database", async () => {
+    const mockData = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await delete{{ pascalCaseSingular }}(db, mockData.id);
+    await delete{{ pascalCase modelName }}(db, mockData.id);
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^delete from "{{ snakeCasePlural }}" where "{{ snakeCasePlural }}"."id" = \$1 returning (.+)$/;
+    const q = /^delete from "{{ snakeCase modelName "plural" }}" where "{{ snakeCase modelName "plural" }}"."id" = \$1 returning (.+)$/;
     expect(query.text).toMatch(q);
     expect(parameters).toEqual([mockData.id]);
 

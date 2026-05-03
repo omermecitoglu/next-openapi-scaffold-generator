@@ -1,29 +1,29 @@
 export const { DELETE } = defineRoute({
-  operationId: "delete{{ pascalCaseSingular }}",
+  operationId: "delete{{ pascalCase modelName }}",
   method: "DELETE",
-  summary: "Delete {{ noCaseSingular }}",
-  description: "Delete a specific {{ noCaseSingular }} by ID",
-  tags: ["{{ capitalCasePlural }}"],
-  pathParams: {{ pascalCaseSingular }}DTO.pick({ id: true }),
+  summary: "Delete {{ noCase modelName }}",
+  description: "Delete a specific {{ noCase modelName }} by ID",
+  tags: ["{{ capitalCase modelName "plural" }}"],
+  pathParams: {{ pascalCase modelName }}DTO.pick({ id: true }),
   action: async ({ pathParams }) => {
-    const {{ camelCaseSingular }} = await delete{{ pascalCaseSingular }}(db, pathParams.id);
-    if (!{{ camelCaseSingular }}) {
-      return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+    const {{ camelCase modelName }} = await delete{{ pascalCase modelName }}(db, pathParams.id);
+    if (!{{ camelCase modelName }}) {
+      return Response.json({ errorCode: "{{ constantCase modelName }}_NOT_FOUND" }, { status: 404 });
     }
     return new Response(null, { status: 204 });
   },
   handleErrors(errorType, issues) {
     switch (errorType) {
       case "PARSE_PATH_PARAMS":
-        return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+        return Response.json({ errorCode: "{{ constantCase modelName }}_NOT_FOUND" }, { status: 404 });
       default:
         prettyPrintUnhandledError(errorType, issues);
         return Response.json({ errorCode: "UNKNOWN_ERROR" }, { status: 500 });
     }
   },
   responses: {
-    204: { description: "{{ onlyFirstCapitalCaseSingular }} deleted successfully" },
-    404: { description: "{{ onlyFirstCapitalCaseSingular }} not found", content: z.object({ errorCode: z.literal(["{{ constantCaseSingular }}_NOT_FOUND"]) }) },
+    204: { description: "{{ sentenceCase modelName }} deleted successfully" },
+    404: { description: "{{ sentenceCase modelName }} not found", content: z.object({ errorCode: z.literal(["{{ constantCase modelName }}_NOT_FOUND"]) }) },
     500: { description: "Internal Server Error", content: z.object({ errorCode: z.literal(["UNKNOWN_ERROR"]) }) },
   },
 });

@@ -1,19 +1,12 @@
-import { camelCase, kebabCase, pascalCase } from "~/core/string";
 import render from "~/core/template";
 import handleBarsTemplate from "./read-all.hbs";
 
 type ReadAllOperationTemplate = {
-  camelCasePlural: string,
-  kebabCaseSingular: string,
-  pascalCasePlural: string,
-  pascalCaseSingular: string,
+  modelName: string,
 };
 
 export default function generateReadAllOperation(modelName: string) {
   return render<ReadAllOperationTemplate>(handleBarsTemplate, {
-    camelCasePlural: camelCase(modelName, true),
-    kebabCaseSingular: kebabCase(modelName, false),
-    pascalCasePlural: pascalCase(modelName, true),
-    pascalCaseSingular: pascalCase(modelName, false),
+    modelName,
   });
 }

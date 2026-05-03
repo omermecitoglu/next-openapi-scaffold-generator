@@ -1,21 +1,12 @@
-import { camelCase, kebabCase, pascalCase } from "~/core/string";
 import render from "~/core/template";
 import handleBarsTemplate from "./update.hbs";
 
 type UpdateOperationTemplate = {
-  camelCasePlural: string,
-  camelCaseSingular: string,
-  kebabCasePlural: string,
-  kebabCaseSingular: string,
-  pascalCaseSingular: string,
+  modelName: string,
 };
 
 export default function generateUpdateOperation(modelName: string) {
   return render<UpdateOperationTemplate>(handleBarsTemplate, {
-    camelCasePlural: camelCase(modelName, true),
-    camelCaseSingular: camelCase(modelName, false),
-    kebabCasePlural: kebabCase(modelName, true),
-    kebabCaseSingular: kebabCase(modelName, false),
-    pascalCaseSingular: pascalCase(modelName, false),
+    modelName,
   });
 }

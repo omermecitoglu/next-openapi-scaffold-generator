@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { {{ pascalCaseSingular }}PatchDTO, {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
-import update{{ pascalCaseSingular }} from "./update{{ pascalCaseSingular }}";
+import { {{ pascalCase modelName }}PatchDTO, {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import update{{ pascalCase modelName }} from "./update{{ pascalCase modelName }}";
 
-describe("update{{ pascalCaseSingular }}", () => {
+describe("update{{ pascalCase modelName }}", () => {
   function generateMockPatch() {
-    const zock = zocker({{ pascalCaseSingular }}PatchDTO);
+    const zock = zocker({{ pascalCase modelName }}PatchDTO);
     let mock: ReturnType<typeof zock.generate>;
     do {
       mock = zock.generate();
@@ -14,16 +14,16 @@ describe("update{{ pascalCaseSingular }}", () => {
     return mock;
   }
 
-  it("should update a {{ noCaseSingular }} in the database", async () => {
-    const mockData = zocker({{ pascalCaseSingular }}DTO.pick({ id: true })).generate();
+  it("should update a {{ noCase modelName }} in the database", async () => {
+    const mockData = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate();
     const mockPatch = generateMockPatch();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await update{{ pascalCaseSingular }}(db, mockData.id, mockPatch);
+    await update{{ pascalCase modelName }}(db, mockData.id, mockPatch);
 
     expect(spy).toHaveBeenCalled();
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^update "{{ snakeCasePlural }}" set (.+) where (.+) returning (.+)$/;
+    const q = /^update "{{ snakeCase modelName "plural" }}" set (.+) where (.+) returning (.+)$/;
     expect(query.text).toMatch(q);
     expect(parameters).toEqual([
       ...Object.values(mockPatch).filter(p => typeof p !== "undefined"),

@@ -1,23 +1,12 @@
-import { camelCase, capitalCase, constantCase, noCase, pascalCase } from "~/core/string";
 import render from "~/core/template";
 import handleBarsTemplate from "./update.hbs";
 
 type UpdateOperationRouteTemplate = {
-  camelCaseSingular: string,
-  capitalCasePlural: string,
-  constantCaseSingular: string,
-  noCaseSingular: string,
-  onlyFirstCapitalCaseSingular: string,
-  pascalCaseSingular: string,
+  modelName: string,
 };
 
 export default function generateUpdateOperationRoute(modelName: string) {
   return render<UpdateOperationRouteTemplate>(handleBarsTemplate, {
-    camelCaseSingular: camelCase(modelName, false),
-    capitalCasePlural: capitalCase(modelName, true, false),
-    constantCaseSingular: constantCase(modelName, false),
-    noCaseSingular: noCase(modelName, false),
-    onlyFirstCapitalCaseSingular: capitalCase(modelName, false, true),
-    pascalCaseSingular: pascalCase(modelName, false),
+    modelName,
   });
 }

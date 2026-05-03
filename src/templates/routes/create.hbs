@@ -1,13 +1,13 @@
 export const { POST } = defineRoute({
-  operationId: "create{{ pascalCaseSingular }}",
+  operationId: "create{{ pascalCase modelName }}",
   method: "POST",
-  summary: "Create {{ noCaseSingular }}",
-  description: "Create a new {{ noCaseSingular }}",
-  tags: ["{{ capitalCasePlural }}"],
-  requestBody: New{{ pascalCaseSingular }}DTO,
+  summary: "Create {{ noCase modelName }}",
+  description: "Create a new {{ noCase modelName }}",
+  tags: ["{{ capitalCase modelName "plural" }}"],
+  requestBody: New{{ pascalCase modelName }}DTO,
   action: async ({ body }) => {
-    const {{ camelCaseSingular }} = await create{{ pascalCaseSingular }}(db, body);
-    return Response.json({{ camelCaseSingular }}, { status: 201 });
+    const {{ camelCase modelName }} = await create{{ pascalCase modelName }}(db, body);
+    return Response.json({{ camelCase modelName }}, { status: 201 });
   },
   handleErrors(errorType, issues) {
     switch (errorType) {
@@ -19,7 +19,7 @@ export const { POST } = defineRoute({
     }
   },
   responses: {
-    201: { description: "{{ onlyFirstCapitalCaseSingular }} created successfully", content: {{ pascalCaseSingular }}DTO },
+    201: { description: "{{ sentenceCase modelName }} created successfully", content: {{ pascalCase modelName }}DTO },
     400: { description: "Bad Request", content: z.object({ errorCode: z.literal(["BAD_REQUEST"]) }) },
     500: { description: "Internal Server Error", content: z.object({ errorCode: z.literal(["UNKNOWN_ERROR"]) }) },
   },

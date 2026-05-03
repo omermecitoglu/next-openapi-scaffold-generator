@@ -1,18 +1,18 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
-import get{{ pascalCaseSingular }} from "./get{{ pascalCaseSingular }}";
+import { {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import get{{ pascalCase modelName }} from "./get{{ pascalCase modelName }}";
 
-describe("get{{ pascalCaseSingular }}", () => {
-  it("should retrieve a single {{ noCaseSingular }} by id", async () => {
-    const mockData = zocker({{ pascalCaseSingular }}DTO.pick({ id: true })).generate();
+describe("get{{ pascalCase modelName }}", () => {
+  it("should retrieve a single {{ noCase modelName }} by id", async () => {
+    const mockData = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await get{{ pascalCaseSingular }}(db, mockData.id);
+    await get{{ pascalCase modelName }}(db, mockData.id);
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ camelCasePlural }}" where "{{ camelCasePlural }}"\."id" = \$1 limit \$2$/;
+    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" "{{ camelCase modelName "plural" }}" where "{{ camelCase modelName "plural" }}"\."id" = \$1 limit \$2$/;
     expect(query.text).toMatch(q);
     expect(parameters).toEqual([...Object.values(mockData), 1]);
 

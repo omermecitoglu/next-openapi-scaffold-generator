@@ -1,19 +1,19 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { New{{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
-import create{{ pascalCaseSingular }} from "./create{{ pascalCaseSingular }}";
+import { New{{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import create{{ pascalCase modelName }} from "./create{{ pascalCase modelName }}";
 
-describe("create{{ pascalCaseSingular }}", () => {
-  it("should insert a {{ noCaseSingular }} into the database", async () => {
-    const mockData = zocker(New{{ pascalCaseSingular }}DTO).generate();
+describe("create{{ pascalCase modelName }}", () => {
+  it("should insert a {{ noCase modelName }} into the database", async () => {
+    const mockData = zocker(New{{ pascalCase modelName }}DTO).generate();
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await create{{ pascalCaseSingular }}(db, mockData);
+    await create{{ pascalCase modelName }}(db, mockData);
 
     expect(spy).toHaveBeenCalled();
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^insert into "{{ snakeCasePlural }}" (.+) values (.+) returning (.+)$/;
+    const q = /^insert into "{{ snakeCase modelName "plural" }}" (.+) values (.+) returning (.+)$/;
     expect(query.text).toMatch(q);
     expect(parameters).toEqual(Object.values(mockData));
 

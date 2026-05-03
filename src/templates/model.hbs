@@ -1,29 +1,29 @@
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { createSharedRefinements } from "drizzle-zod-shared-refinements";
-import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
+import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
 import type z from "zod";
 
-const sharedRefinements = createSharedRefinements({{ camelCasePlural }}, {
-  id: schema => schema.readonly().describe("Unique identifier of the {{ noCaseSingular }}"),
+const sharedRefinements = createSharedRefinements({{ camelCase modelName "plural" }}, {
+  id: schema => schema.readonly().describe("Unique identifier of the {{ noCase modelName }}"),
   // describe other fields here
-  createdAt: schema => schema.readonly().describe("Creation date of the {{ noCaseSingular }} as an ISO 8601 date string"),
-  updatedAt: schema => schema.readonly().describe("Modification date of the {{ noCaseSingular }} as an ISO 8601 date string"),
+  createdAt: schema => schema.readonly().describe("Creation date of the {{ noCase modelName }} as an ISO 8601 date string"),
+  updatedAt: schema => schema.readonly().describe("Modification date of the {{ noCase modelName }} as an ISO 8601 date string"),
 });
 
-export const {{ pascalCaseSingular }}DTO = createSelectSchema({{ camelCasePlural }}, sharedRefinements).describe("Represents a {{ noCaseSingular }} definition");
+export const {{ pascalCase modelName }}DTO = createSelectSchema({{ camelCase modelName "plural" }}, sharedRefinements).describe("Represents a {{ noCase modelName }} definition");
 
-export const New{{ pascalCaseSingular }}DTO = createInsertSchema({{ camelCasePlural }}, sharedRefinements).omit({
+export const New{{ pascalCase modelName }}DTO = createInsertSchema({{ camelCase modelName "plural" }}, sharedRefinements).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
-}).describe("Data Transfer Object for creating a new {{ noCaseSingular }}");
+}).describe("Data Transfer Object for creating a new {{ noCase modelName }}");
 
-export const {{ pascalCaseSingular }}PatchDTO = createUpdateSchema({{ camelCasePlural }}, sharedRefinements).omit({
+export const {{ pascalCase modelName }}PatchDTO = createUpdateSchema({{ camelCase modelName "plural" }}, sharedRefinements).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
-}).describe("Data Transfer Object for updating an existing {{ noCaseSingular }}");
+}).describe("Data Transfer Object for updating an existing {{ noCase modelName }}");
 
-export type {{ pascalCaseSingular }} = z.infer<typeof {{ pascalCaseSingular }}DTO>;
-export type New{{ pascalCaseSingular }} = z.infer<typeof New{{ pascalCaseSingular }}DTO>;
-export type {{ pascalCaseSingular }}Patch = z.infer<typeof {{ pascalCaseSingular }}PatchDTO>;
+export type {{ pascalCase modelName }} = z.infer<typeof {{ pascalCase modelName }}DTO>;
+export type New{{ pascalCase modelName }} = z.infer<typeof New{{ pascalCase modelName }}DTO>;
+export type {{ pascalCase modelName }}Patch = z.infer<typeof {{ pascalCase modelName }}PatchDTO>;

@@ -1,10 +1,10 @@
 import defineRoute from "@omer-x/next-openapi-route-handler";
 import z from "zod";
 import db from "~/database";
-import { {{ pascalCaseSingular }}DTO, {{ pascalCaseSingular }}PatchDTO } from "~/models/{{ kebabCaseSingular }}";
-import delete{{ pascalCaseSingular }} from "~/operations/delete{{ pascalCaseSingular }}";
-import get{{ pascalCaseSingular }} from "~/operations/get{{ pascalCaseSingular }}";
-import update{{ pascalCaseSingular }} from "~/operations/update{{ pascalCaseSingular }}";
+import { {{ pascalCase modelName }}DTO, {{ pascalCase modelName }}PatchDTO } from "~/models/{{ kebabCase modelName }}";
+import delete{{ pascalCase modelName }} from "~/operations/delete{{ pascalCase modelName }}";
+import get{{ pascalCase modelName }} from "~/operations/get{{ pascalCase modelName }}";
+import update{{ pascalCase modelName }} from "~/operations/update{{ pascalCase modelName }}";
 import { prettyPrintUnhandledError } from "~/utils/error";
 
 {{{ readOperation }}}

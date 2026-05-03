@@ -1,8 +1,8 @@
 import type database from "~/database";
-import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
-import { type New{{ pascalCaseSingular }} } from "~/models/{{ kebabCaseSingular }}";
+import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
+import { type New{{ pascalCase modelName }} } from "~/models/{{ kebabCase modelName }}";
 
-export default async function create{{ pascalCaseSingular }}(db: Omit<typeof database, "$client">, data: New{{ pascalCaseSingular }}) {
-  const [{{ camelCaseSingular }}] = await db.insert({{ camelCasePlural }}).values(data).returning({ id: {{ camelCasePlural }}.id });
-  return {{ camelCaseSingular }};
+export default async function create{{ pascalCase modelName }}(db: Omit<typeof database, "$client">, data: New{{ pascalCase modelName }}) {
+  const [{{ camelCase modelName }}] = await db.insert({{ camelCase modelName "plural" }}).values(data).returning({ id: {{ camelCase modelName "plural" }}.id });
+  return {{ camelCase modelName }};
 }

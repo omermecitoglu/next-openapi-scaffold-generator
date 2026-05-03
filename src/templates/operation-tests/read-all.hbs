@@ -1,45 +1,45 @@
 import { describe, expect, it, vi } from "vitest";
 import db from "~/database";
-import get{{ pascalCasePlural }} from "./get{{ pascalCasePlural }}";
+import get{{ pascalCase modelName "plural" }} from "./get{{ pascalCase modelName "plural" }}";
 
-describe("get{{ pascalCasePlural }}", () => {
-  it("should retrieve all {{ noCasePlural }} from the database", async () => {
+describe("get{{ pascalCase modelName "plural" }}", () => {
+  it("should retrieve all {{ noCase modelName "plural" }} from the database", async () => {
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await get{{ pascalCasePlural }}(db);
+    await get{{ pascalCase modelName "plural" }}(db);
 
     const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ camelCasePlural }}" order by "{{ camelCasePlural }}"."created_at" asc$/;
+    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" "{{ camelCase modelName "plural" }}" order by "{{ camelCase modelName "plural" }}"."created_at" asc$/;
     expect(query.text).toMatch(q);
 
     spy.mockRestore();
   });
 
-  it("should retrieve {{ noCasePlural }} with limit and offset", async () => {
+  it("should retrieve {{ noCase modelName "plural" }} with limit and offset", async () => {
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await get{{ pascalCasePlural }}(db, {
+    await get{{ pascalCase modelName "plural" }}(db, {
       limit: 50,
       offset: 50,
     });
 
     const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCasePlural }}" "{{ camelCasePlural }}" order by "{{ camelCasePlural }}"."created_at" asc limit \$1 offset \$2$/;
+    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" "{{ camelCase modelName "plural" }}" order by "{{ camelCase modelName "plural" }}"."created_at" asc limit \$1 offset \$2$/;
     expect(query.text).toMatch(q);
     expect(parameters).toEqual([50, 50]);
 
     spy.mockRestore();
   });
 
-  it("should retrieve {{ noCasePlural }} with specific fields selected", async () => {
+  it("should retrieve {{ noCase modelName "plural" }} with specific fields selected", async () => {
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await get{{ pascalCasePlural }}(db, {
+    await get{{ pascalCase modelName "plural" }}(db, {
       select: ["id", "createdAt"],
     });
 
     const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select "id", "created_at" from "{{ snakeCasePlural }}" "{{ camelCasePlural }}" order by "{{ camelCasePlural }}"."created_at" asc$/;
+    const q = /^select "id", "created_at" from "{{ snakeCase modelName "plural" }}" "{{ camelCase modelName "plural" }}" order by "{{ camelCase modelName "plural" }}"."created_at" asc$/;
     expect(query.text).toMatch(q);
 
     spy.mockRestore();

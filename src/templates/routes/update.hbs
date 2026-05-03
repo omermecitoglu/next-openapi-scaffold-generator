@@ -1,33 +1,33 @@
 export const { PATCH } = defineRoute({
-  operationId: "update{{ pascalCaseSingular }}",
+  operationId: "update{{ pascalCase modelName }}",
   method: "PATCH",
-  summary: "Update {{ noCaseSingular }}",
-  description: "Update a specific {{ noCaseSingular }} by ID",
-  tags: ["{{ capitalCasePlural }}"],
-  pathParams: {{ pascalCaseSingular }}DTO.pick({ id: true }),
-  requestBody: {{ pascalCaseSingular }}PatchDTO,
+  summary: "Update {{ noCase modelName }}",
+  description: "Update a specific {{ noCase modelName }} by ID",
+  tags: ["{{ capitalCase modelName "plural" }}"],
+  pathParams: {{ pascalCase modelName }}DTO.pick({ id: true }),
+  requestBody: {{ pascalCase modelName }}PatchDTO,
   action: async ({ pathParams, body }) => {
-    const {{ camelCaseSingular }} = await update{{ pascalCaseSingular }}(db, pathParams.id, body);
-    if (!{{ camelCaseSingular }}) {
-      return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+    const {{ camelCase modelName }} = await update{{ pascalCase modelName }}(db, pathParams.id, body);
+    if (!{{ camelCase modelName }}) {
+      return Response.json({ errorCode: "{{ constantCase modelName }}_NOT_FOUND" }, { status: 404 });
     }
-    return Response.json({{ camelCaseSingular }});
+    return Response.json({{ camelCase modelName }});
   },
   handleErrors(errorType, issues) {
     switch (errorType) {
       case "PARSE_REQUEST_BODY":
         return Response.json({ errorCode: "BAD_REQUEST" }, { status: 400 });
       case "PARSE_PATH_PARAMS":
-        return Response.json({ errorCode: "{{ constantCaseSingular }}_NOT_FOUND" }, { status: 404 });
+        return Response.json({ errorCode: "{{ constantCase modelName }}_NOT_FOUND" }, { status: 404 });
       default:
         prettyPrintUnhandledError(errorType, issues);
         return Response.json({ errorCode: "UNKNOWN_ERROR" }, { status: 500 });
     }
   },
   responses: {
-    200: { description: "{{ onlyFirstCapitalCaseSingular }} updated successfully", content: {{ pascalCaseSingular }}DTO },
+    200: { description: "{{ sentenceCase modelName }} updated successfully", content: {{ pascalCase modelName }}DTO },
     400: { description: "Bad Request", content: z.object({ errorCode: z.literal(["BAD_REQUEST"]) }) },
-    404: { description: "{{ onlyFirstCapitalCaseSingular }} not found", content: z.object({ errorCode: z.literal(["{{ constantCaseSingular }}_NOT_FOUND"]) }) },
+    404: { description: "{{ sentenceCase modelName }} not found", content: z.object({ errorCode: z.literal(["{{ constantCase modelName }}_NOT_FOUND"]) }) },
     500: { description: "Internal Server Error", content: z.object({ errorCode: z.literal(["UNKNOWN_ERROR"]) }) },
   },
 });

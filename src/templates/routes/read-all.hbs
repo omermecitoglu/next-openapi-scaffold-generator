@@ -1,13 +1,13 @@
 export const { GET } = defineRoute({
-  operationId: "get{{ pascalCasePlural }}",
+  operationId: "get{{ pascalCase modelName "plural" }}",
   method: "GET",
-  summary: "Get all {{ noCasePlural }}",
-  description: "Retrieve a list of {{ noCasePlural }}",
-  tags: ["{{ capitalCasePlural }}"],
+  summary: "Get all {{ noCase modelName "plural" }}",
+  description: "Retrieve a list of {{ noCase modelName "plural" }}",
+  tags: ["{{ capitalCase modelName "plural" }}"],
   queryParams: z.object({
     offset: z.int32().min(0),
     limit: z.int32().min(0),
-    select: {{ pascalCaseSingular }}DTO.keyof().array().default([])
+    select: {{ pascalCase modelName }}DTO.keyof().array().default([])
       .describe("List of the column names"),
   }),
   action: async ({ queryParams }) => {
@@ -15,8 +15,8 @@ export const { GET } = defineRoute({
       [total],
       items,
     ] = await Promise.all([
-      db.select({ count: count() }).from({{ camelCasePlural }}),
-      get{{ pascalCasePlural }}(db, queryParams),
+      db.select({ count: count() }).from({{ camelCase modelName "plural" }}),
+      get{{ pascalCase modelName "plural" }}(db, queryParams),
     ]);
     return Response.json({
       items,
@@ -38,9 +38,9 @@ export const { GET } = defineRoute({
   },
   responses: {
     200: {
-      description: "Returns a list of {{ noCasePlural }}",
+      description: "Returns a list of {{ noCase modelName "plural" }}",
       content: z.object({
-        items: {{ pascalCaseSingular }}DTO.array(),
+        items: {{ pascalCase modelName }}DTO.array(),
         pagination: z.object({
           offset: z.int32().min(0),
           limit: z.int32().min(0),

@@ -2,10 +2,10 @@ import defineRoute from "@omer-x/next-openapi-route-handler";
 import { count } from "drizzle-orm";
 import z from "zod";
 import db from "~/database";
-import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
-import { New{{ pascalCaseSingular }}DTO, {{ pascalCaseSingular }}DTO } from "~/models/{{ kebabCaseSingular }}";
-import create{{ pascalCaseSingular }} from "~/operations/create{{ pascalCaseSingular }}";
-import get{{ pascalCasePlural }} from "~/operations/get{{ pascalCasePlural }}";
+import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
+import { New{{ pascalCase modelName }}DTO, {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import create{{ pascalCase modelName }} from "~/operations/create{{ pascalCase modelName }}";
+import get{{ pascalCase modelName "plural" }} from "~/operations/get{{ pascalCase modelName "plural" }}";
 import { prettyPrintUnhandledError } from "~/utils/error";
 
 {{{ readAllOperation }}}

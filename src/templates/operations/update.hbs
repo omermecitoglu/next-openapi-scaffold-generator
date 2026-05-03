@@ -1,12 +1,12 @@
 import { eq } from "drizzle-orm";
 import type database from "~/database";
-import { {{ camelCasePlural }} } from "~/database/schema/{{ kebabCasePlural }}";
-import { type {{ pascalCaseSingular }}Patch } from "~/models/{{ kebabCaseSingular }}";
+import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
+import { type {{ pascalCase modelName }}Patch } from "~/models/{{ kebabCase modelName }}";
 
-export default async function update{{ pascalCaseSingular }}(db: Omit<typeof database, "$client">, {{ camelCaseSingular }}Id: string, patch: {{ pascalCaseSingular }}Patch) {
-  const results = await db.update({{ camelCasePlural }})
+export default async function update{{ pascalCase modelName }}(db: Omit<typeof database, "$client">, {{ camelCase modelName }}Id: string, patch: {{ pascalCase modelName }}Patch) {
+  const results = await db.update({{ camelCase modelName "plural" }})
     .set(patch)
-    .where(eq({{ camelCasePlural }}.id, {{ camelCaseSingular }}Id))
+    .where(eq({{ camelCase modelName "plural" }}.id, {{ camelCase modelName }}Id))
     .returning();
   return results.at(0);
 }
