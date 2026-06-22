@@ -1,7 +1,8 @@
 #!/usr/bin/env node
+import { kebabCase, pascalCase } from "change-case";
+import pluralize from "pluralize";
 import prompts from "prompts";
 import { appendFile, checkFile, saveFile } from "./core/file";
-import { kebabCase, pascalCase } from "./core/string";
 import generateApiRoute from "./templates/api-route";
 import generateApiRouteWithId from "./templates/api-route-with-id";
 import generateModel from "./templates/model";
@@ -44,27 +45,27 @@ const { operationTests } = await prompts({
 });
 
 if (modelName) {
-  await saveFile(`src/app/${kebabCase(modelName, true)}`, "route.ts", generateApiRoute(modelName));
-  await saveFile(`src/app/${kebabCase(modelName, true)}/[id]`, "route.ts", generateApiRouteWithId(modelName));
+  await saveFile(`src/app/${kebabCase(pluralize(modelName))}`, "route.ts", generateApiRoute(modelName));
+  await saveFile(`src/app/${kebabCase(pluralize(modelName))}/[id]`, "route.ts", generateApiRouteWithId(modelName));
   if (orm === "drizzle") {
-    await saveFile("src/database/schema", `${kebabCase(modelName, true)}.ts`, generateSchema(modelName));
-    const exportStatement = `export * from "./${kebabCase(modelName, true)}";`;
+    await saveFile("src/database/schema", `${kebabCase(pluralize(modelName))}.ts`, generateSchema(modelName));
+    const exportStatement = `export * from "./${kebabCase(pluralize(modelName))}";`;
     const exported = await checkFile("src/database/schema", "index.ts", exportStatement);
     if (!exported) {
-      await appendFile("src/database/schema", "index.ts", `export * from "./${kebabCase(modelName, true)}";`);
+      await appendFile("src/database/schema", "index.ts", `export * from "./${kebabCase(pluralize(modelName))}";`);
     }
   }
-  await saveFile("src/models", `${kebabCase(modelName, false)}.ts`, generateModel(modelName));
-  await saveFile("src/operations", `get${pascalCase(modelName, true)}.ts`, generateReadAllOperation(modelName));
-  await saveFile("src/operations", `create${pascalCase(modelName, false)}.ts`, generateCreateOperation(modelName));
-  await saveFile("src/operations", `get${pascalCase(modelName, false)}.ts`, generateReadOperation(modelName));
-  await saveFile("src/operations", `update${pascalCase(modelName, false)}.ts`, generateUpdateOperation(modelName));
-  await saveFile("src/operations", `delete${pascalCase(modelName, false)}.ts`, generateDeleteOperation(modelName));
+  await saveFile("src/models", `${kebabCase(pluralize(modelName))}.ts`, generateModel(modelName));
+  await saveFile("src/operations", `get${pascalCase(pluralize(modelName))}.ts`, generateReadAllOperation(modelName));
+  await saveFile("src/operations", `create${pascalCase(pluralize(modelName))}.ts`, generateCreateOperation(modelName));
+  await saveFile("src/operations", `get${pascalCase(pluralize(modelName))}.ts`, generateReadOperation(modelName));
+  await saveFile("src/operations", `update${pascalCase(pluralize(modelName))}.ts`, generateUpdateOperation(modelName));
+  await saveFile("src/operations", `delete${pascalCase(pluralize(modelName))}.ts`, generateDeleteOperation(modelName));
   if (operationTests) {
-    await saveFile("src/operations", `get${pascalCase(modelName, true)}.test.ts`, generateReadAllTest(modelName));
-    await saveFile("src/operations", `create${pascalCase(modelName, false)}.test.ts`, generateCreateTest(modelName));
-    await saveFile("src/operations", `get${pascalCase(modelName, false)}.test.ts`, generateReadTest(modelName));
-    await saveFile("src/operations", `update${pascalCase(modelName, false)}.test.ts`, generateUpdateTest(modelName));
-    await saveFile("src/operations", `delete${pascalCase(modelName, false)}.test.ts`, generateDeleteTest(modelName));
+    await saveFile("src/operations", `get${pascalCase(pluralize(modelName))}.test.ts`, generateReadAllTest(modelName));
+    await saveFile("src/operations", `create${pascalCase(pluralize(modelName))}.test.ts`, generateCreateTest(modelName));
+    await saveFile("src/operations", `get${pascalCase(pluralize(modelName))}.test.ts`, generateReadTest(modelName));
+    await saveFile("src/operations", `update${pascalCase(pluralize(modelName))}.test.ts`, generateUpdateTest(modelName));
+    await saveFile("src/operations", `delete${pascalCase(pluralize(modelName))}.test.ts`, generateDeleteTest(modelName));
   }
 }
