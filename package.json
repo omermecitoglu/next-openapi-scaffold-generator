@@ -47,6 +47,7 @@
   },
   "scripts": {
     "lint": "eslint --flag unstable_native_nodejs_ts_config",
+    "lint:fix": "eslint --fix --flag unstable_native_nodejs_ts_config",
     "test": "vitest run --coverage",
     "test:watch": "vitest --coverage",
     "dev": "concurrently \"tsup --watch\" \"chokidar 'src/**/*.hbs' -c 'touch src/index.ts'\"",
@@ -54,23 +55,23 @@
   },
   "dependencies": {
     "change-case": "^5.4.4",
-    "handlebars": "^4.7.8",
+    "handlebars": "^4.7.9",
     "pluralize": "^8.0.0",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@omer-x/eslint-config": "^2.2.6",
-    "@types/node": "^25.0.1",
+    "@omer-x/eslint-config": "^2.3.2",
+    "@types/node": "^26.0.0",
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/coverage-v8": "^4.1.9",
     "chokidar-cli": "^3.0.0",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.3",
     "esbuild-plugin-inline-import": "^1.1.0",
     "eslint": "^9.39.1",
-    "semantic-release": "^25.0.2",
+    "semantic-release": "^25.0.5",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.15"
+    "vitest": "^4.1.9"
   }
 }
