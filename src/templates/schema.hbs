@@ -13,8 +13,8 @@ export const {{ camelCase modelName "plural" }} = snakeCase.table("{{ snakeCase 
   exampleVarchar: varchar({ length: 16 }).notNull().default("hello world"),
   examplechar: char({ length: 16 }).notNull().default("hello world "),
   // ...
-  createdAt: timestamp({ mode: "string" }).notNull().defaultNow(),
-  updatedAt: timestamp({ mode: "string" }).notNull().defaultNow().$onUpdate(() => sql`now()`),
+  createdAt: timestamp({ mode: "string", withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp({ mode: "string", withTimezone: true }).notNull().defaultNow().$onUpdate(() => sql`now()`),
 }, table => [
   index().on(table.createdAt),
 ]);
