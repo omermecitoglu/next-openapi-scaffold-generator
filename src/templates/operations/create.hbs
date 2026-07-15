@@ -1,4 +1,4 @@
-import type database from "~/database";
+import { type db as database } from "~/database";
 import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
 import { type New{{ pascalCase modelName }} } from "~/models/{{ kebabCase modelName }}";
 

@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import type database from "~/database";
+import { type db as database } from "~/database";
 import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
 import { type {{ pascalCase modelName }}Patch } from "~/models/{{ kebabCase modelName }}";
 

@@ -1,6 +1,6 @@
 import defineRoute from "@omer-x/next-openapi-route-handler";
 import z from "zod";
-import db from "~/database";
+import { db } from "~/database";
 import { {{ pascalCase modelName }}DTO, {{ pascalCase modelName }}PatchDTO } from "~/models/{{ kebabCase modelName }}";
 import delete{{ pascalCase modelName }} from "~/operations/delete{{ pascalCase modelName }}";
 import get{{ pascalCase modelName }} from "~/operations/get{{ pascalCase modelName }}";

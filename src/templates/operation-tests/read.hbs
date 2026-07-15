@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
-import db from "~/database";
+import { db } from "~/database";
 import { {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
 import get{{ pascalCase modelName }} from "./get{{ pascalCase modelName }}";
 

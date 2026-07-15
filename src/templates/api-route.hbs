@@ -2,7 +2,7 @@ import { pluck } from "@omer/object";
 import defineRoute from "@omer-x/next-openapi-route-handler";
 import { count } from "drizzle-orm";
 import z from "zod";
-import db from "~/database";
+import { db } from "~/database";
 import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
 import { New{{ pascalCase modelName }}DTO, {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
 import create{{ pascalCase modelName }} from "~/operations/create{{ pascalCase modelName }}";
