@@ -1,5 +1,5 @@
 import render from "~/core/template";
-import handleBarsTemplate from "./update.hbs";
+import handleBarsTemplate from "./update.hbs?raw";
 
 type UpdateOperationRouteTemplate = {
   modelName: string,

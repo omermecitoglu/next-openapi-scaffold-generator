@@ -1,5 +1,5 @@
 import render from "~/core/template";
-import handleBarsTemplate from "./model.hbs";
+import handleBarsTemplate from "./model.hbs?raw";
 
 type ModelTemplate = {
   modelName: string,

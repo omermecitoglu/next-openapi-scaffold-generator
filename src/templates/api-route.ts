@@ -1,5 +1,5 @@
 import render from "~/core/template";
-import handleBarsTemplate from "./api-route.hbs";
+import handleBarsTemplate from "./api-route.hbs?raw";
 import generateCreateOperationRoute from "./routes/create";
 import generateReadAllOperationRoute from "./routes/read-all";
 

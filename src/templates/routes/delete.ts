@@ -1,5 +1,5 @@
 import render from "~/core/template";
-import handleBarsTemplate from "./delete.hbs";
+import handleBarsTemplate from "./delete.hbs?raw";
 
 type DeleteOperationRouteTemplate = {
   modelName: string,

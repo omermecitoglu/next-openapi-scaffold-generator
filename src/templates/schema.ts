@@ -1,5 +1,5 @@
 import render from "~/core/template";
-import handleBarsTemplate from "./schema.hbs";
+import handleBarsTemplate from "./schema.hbs?raw";
 
 type SchemaTemplate = {
   modelName: string,

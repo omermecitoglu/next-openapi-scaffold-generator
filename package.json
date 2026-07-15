@@ -50,8 +50,8 @@
     "lint:fix": "eslint --fix --flag unstable_native_nodejs_ts_config",
     "test": "vitest run --coverage",
     "test:watch": "vitest --coverage",
-    "dev": "concurrently \"tsup --watch\" \"chokidar 'src/**/*.hbs' -c 'touch src/index.ts'\"",
-    "build": "tsup"
+    "dev": "concurrently \"tsdown --watch\" \"chokidar 'src/**/*.hbs' -c 'touch src/index.ts'\"",
+    "build": "tsdown"
   },
   "dependencies": {
     "change-case": "^5.4.4",
@@ -67,11 +67,11 @@
     "@vitest/coverage-v8": "^4.1.10",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^10.0.3",
-    "esbuild-plugin-inline-import": "^1.1.0",
     "eslint": "^9.39.1",
     "semantic-release": "^25.0.7",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.22.7",
     "typescript": "^5.9.3",
+    "unplugin-raw": "^0.7.0",
     "vitest": "^4.1.10"
   }
 }
