@@ -3,8 +3,6 @@ import type database from "~/database";
 import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
 
 export default async function delete{{ pascalCase modelName }}(db: Omit<typeof database, "$client">, {{ camelCase modelName }}Id: string) {
-  const results = await db.delete({{ camelCase modelName "plural" }}).where(eq({{ camelCase modelName "plural" }}.id, {{ camelCase modelName }}Id)).returning({
-    id: {{ camelCase modelName "plural" }}.id,
-  });
+  const results = await db.delete({{ camelCase modelName "plural" }}).where(eq({{ camelCase modelName "plural" }}.id, {{ camelCase modelName }}Id)).returning();
   return results.at(0);
 }
