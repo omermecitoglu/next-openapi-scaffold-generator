@@ -1,21 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "bin",
-    "target": "ESNext",
-    "lib": [],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": false,
-    "esModuleInterop": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": false,
-    "plugins": [
-    ],
+    "strict": true, // default in ts6, can be removed after upgrade
+    "module": "esnext", // default in ts6, can be removed after upgrade
+    "moduleResolution": "bundler", // default in ts6, can be removed after upgrade
+    "target": "esnext", // default in ts6, can be removed after upgrade
+    "rootDir": ".", // default in ts6, can be removed after upgrade
+    "noUncheckedSideEffectImports": true, // default in ts6, can be removed after upgrade
+    "libReplacement": false, // default in ts6, can be removed after upgrade
+    "types": ["node"],
+    "lib": ["ESNext"],
     "paths": {
       "~/*": ["./src/*"]
     },
@@ -23,5 +16,5 @@
   "include": [
     "**/*.ts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "bin"]
 }
