@@ -8,13 +8,13 @@ import generateApiRouteWithId from "./templates/api-route-with-id";
 import generateModel from "./templates/model";
 import generateCreateTest from "./templates/operation-tests/create";
 import generateDeleteTest from "./templates/operation-tests/delete";
+import generateReadAllTest from "./templates/operation-tests/find";
 import generateReadTest from "./templates/operation-tests/read";
-import generateReadAllTest from "./templates/operation-tests/read-all";
 import generateUpdateTest from "./templates/operation-tests/update";
 import generateCreateOperation from "./templates/operations/create";
 import generateDeleteOperation from "./templates/operations/delete";
+import generateReadAllOperation from "./templates/operations/find";
 import generateReadOperation from "./templates/operations/read";
-import generateReadAllOperation from "./templates/operations/read-all";
 import generateUpdateOperation from "./templates/operations/update";
 import generateSchema from "./templates/schema";
 
