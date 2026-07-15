@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { zocker } from "zocker";
 import db from "~/database";
-import { {{ pascalCase modelName }}PatchDTO, {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import { {{ pascalCase modelName }}DTO, {{ pascalCase modelName }}PatchDTO } from "~/models/{{ kebabCase modelName }}";
 import update{{ pascalCase modelName }} from "./update{{ pascalCase modelName }}";
 
 describe("update{{ pascalCase modelName }}", () => {

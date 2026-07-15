@@ -1,17 +1,16 @@
 import type database from "~/database";
-import { type {{ pascalCase modelName }} } from "~/models/{{ kebabCase modelName }}";
-import selectColumns from "~/utils/column";
 
 type Options = {
   offset?: number,
   limit?: number,
-  select?: (keyof {{ pascalCase modelName }})[],
 };
 
-export default function get{{ pascalCase modelName "plural" }}(db: Omit<typeof database, "$client">, options: Options = {}) {
-  const { offset, limit, select } = options;
+export default function find{{ pascalCase modelName "singular" }}Ids(db: Omit<typeof database, "$client">, options: Options = {}) {
+  const { offset, limit } = options;
   return db.query.{{ camelCase modelName "plural" }}.findMany({
-    columns: selectColumns(select ?? []),
+    columns: {
+      id: true,
+    },
     orderBy: {
       createdAt: "asc",
     },

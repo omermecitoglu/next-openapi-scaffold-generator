@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 import db from "~/database";
-import get{{ pascalCase modelName "plural" }} from "./get{{ pascalCase modelName "plural" }}";
+import find{{ pascalCase modelName "singular" }}Ids from "./find{{ pascalCase modelName "singular" }}Ids";
 
-describe("get{{ pascalCase modelName "plural" }}", () => {
+describe("find{{ pascalCase modelName "singular" }}Ids", () => {
   it("should retrieve all {{ noCase modelName "plural" }} from the database", async () => {
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await get{{ pascalCase modelName "plural" }}(db);
+    await find{{ pascalCase modelName "singular" }}Ids(db);
 
     const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
     const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" as "d0" order by "d0"."created_at" asc$/;
@@ -18,7 +18,7 @@ describe("get{{ pascalCase modelName "plural" }}", () => {
   it("should retrieve {{ noCase modelName "plural" }} with limit and offset", async () => {
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await get{{ pascalCase modelName "plural" }}(db, {
+    await find{{ pascalCase modelName "singular" }}Ids(db, {
       limit: 50,
       offset: 50,
     });
@@ -34,9 +34,7 @@ describe("get{{ pascalCase modelName "plural" }}", () => {
   it("should retrieve {{ noCase modelName "plural" }} with specific fields selected", async () => {
     const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
 
-    await get{{ pascalCase modelName "plural" }}(db, {
-      select: ["id", "createdAt"],
-    });
+    await find{{ pascalCase modelName "singular" }}Ids(db, {});
 
     const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
     expect(query.text).toContain("select");
