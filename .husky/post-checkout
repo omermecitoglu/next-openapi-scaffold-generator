@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+old=$1
+new=$2
+
+if git diff --name-only "$old" "$new" | grep -qE '^(package\.json|package-lock\.json)$'; then
+  echo "Dependencies changed..."
+  npm install
+fi

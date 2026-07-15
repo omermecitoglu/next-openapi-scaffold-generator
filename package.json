@@ -51,7 +51,8 @@
     "test": "vitest run --coverage",
     "test:watch": "vitest --coverage",
     "dev": "concurrently \"tsdown --watch\" \"chokidar 'src/**/*.hbs' -c 'touch src/index.ts'\"",
-    "build": "tsdown"
+    "build": "tsdown",
+    "prepare": "husky"
   },
   "dependencies": {
     "change-case": "^5.4.4",
@@ -68,6 +69,7 @@
     "chokidar-cli": "^3.0.0",
     "concurrently": "^10.0.3",
     "eslint": "^9.39.1",
+    "husky": "^9.1.7",
     "semantic-release": "^25.0.7",
     "tsdown": "^0.22.7",
     "typescript": "^6.0.3",
