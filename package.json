@@ -61,17 +61,17 @@
   },
   "devDependencies": {
     "@omer-x/eslint-config": "^2.3.2",
-    "@types/node": "^26.0.0",
+    "@types/node": "^26.1.1",
     "@types/pluralize": "^0.0.33",
     "@types/prompts": "^2.4.9",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.10",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^10.0.3",
     "esbuild-plugin-inline-import": "^1.1.0",
     "eslint": "^9.39.1",
-    "semantic-release": "^25.0.5",
+    "semantic-release": "^25.0.7",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   }
 }
