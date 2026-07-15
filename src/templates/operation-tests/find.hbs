@@ -1,49 +1,29 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
+import { zocker } from "zocker";
 import { db } from "~/database";
-import find{{ pascalCase modelName "singular" }}Ids from "./find{{ pascalCase modelName "singular" }}Ids";
+import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCase modelName "plural" }}";
+import { New{{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import find{{ pascalCase modelName }}Ids from "./find{{ pascalCase modelName }}Ids";
 
-describe("find{{ pascalCase modelName "singular" }}Ids", () => {
-  it("should retrieve all {{ noCase modelName "plural" }} from the database", async () => {
-    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
-
-    await find{{ pascalCase modelName "singular" }}Ids(db);
-
-    const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" as "d0" order by "d0"."created_at" asc$/;
-    expect(query.text).toMatch(q);
-
-    spy.mockRestore();
+describe("find{{ pascalCase modelName }}Ids", () => {
+  beforeEach(async () => {
+    const rows = Array.from({ length: 100 }, () => ({
+      ...zocker(New{{ pascalCase modelName }}DTO).generate(),
+    }));
+    await db.insert({{ camelCase modelName "plural" }}).values(rows);
   });
 
-  it("should retrieve {{ noCase modelName "plural" }} with limit and offset", async () => {
-    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
+  it("should retrieve all {{ noCase modelName "plural" }} from the database when no limit is specified", async () => {
+    const result = await find{{ pascalCase modelName }}Ids(db);
+    expect(result.length).toBe(100);
+  });
 
-    await find{{ pascalCase modelName "singular" }}Ids(db, {
+  it("should retrieve a subset of {{ noCase modelName "plural" }} when limit and offset are specified", async () => {
+    const result = await find{{ pascalCase modelName }}Ids(db, {
       limit: 50,
       offset: 50,
     });
 
-    const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" as "d0" order by "d0"."created_at" asc limit \$1 offset \$2$/;
-    expect(query.text).toMatch(q);
-    expect(parameters).toEqual([50, 50]);
-
-    spy.mockRestore();
-  });
-
-  it("should retrieve {{ noCase modelName "plural" }} with specific fields selected", async () => {
-    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
-
-    await find{{ pascalCase modelName "singular" }}Ids(db, {});
-
-    const [query] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    expect(query.text).toContain("select");
-    expect(query.text).toContain("id");
-    expect(query.text).toContain("createdAt");
-    expect(query.text).toContain("from");
-    expect(query.text).toContain("{{ snakeCase modelName "plural" }}");
-    expect(query.text).toContain("order by");
-
-    spy.mockRestore();
+    expect(result.length).toBe(50);
   });
 });

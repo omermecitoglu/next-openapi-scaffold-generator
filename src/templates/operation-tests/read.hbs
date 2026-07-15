@@ -1,21 +1,24 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { zocker } from "zocker";
 import { db } from "~/database";
-import { {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import { {{ pascalCase modelName }}DTO, New{{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import create{{ pascalCase modelName }} from "./create{{ pascalCase modelName }}";
 import get{{ pascalCase modelName }} from "./get{{ pascalCase modelName }}";
 
 describe("get{{ pascalCase modelName }}", () => {
-  it("should retrieve a single {{ noCase modelName }} by id", async () => {
-    const mockData = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate();
-    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
+  it("should return undefined when no {{ noCase modelName }} is found with the given id", async () => {
+    const mock{{ pascalCase modelName }}Id = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate().id;
+    const {{ camelCase modelName }} = await get{{ pascalCase modelName }}(db, mock{{ pascalCase modelName }}Id);
+    expect({{ camelCase modelName }}).toBeUndefined();
+  });
 
-    await get{{ pascalCase modelName }}(db, mockData.id);
+  it("should return the {{ noCase modelName }} when a {{ noCase modelName }} is found with the given id", async () => {
+    const created{{ pascalCase modelName }} = await create{{ pascalCase modelName }}(db, {
+      ...zocker(New{{ pascalCase modelName }}DTO).generate(),
+    });
 
-    const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^select (.+) from "{{ snakeCase modelName "plural" }}" as "d0" where "d0"\."id" = \$1 limit \$2$/;
-    expect(query.text).toMatch(q);
-    expect(parameters).toEqual([...Object.values(mockData), 1]);
-
-    spy.mockRestore();
+    const {{ camelCase modelName }} = await get{{ pascalCase modelName }}(db, created{{ pascalCase modelName }}.id);
+    expect({{ camelCase modelName }}).not.toBeUndefined();
+    expect({{ camelCase modelName }}?.id).toBe(created{{ pascalCase modelName }}.id);
   });
 });

@@ -1,21 +1,25 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { zocker } from "zocker";
 import { db } from "~/database";
-import { {{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import { {{ pascalCase modelName }}DTO, New{{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import create{{ pascalCase modelName }} from "./create{{ pascalCase modelName }}";
 import delete{{ pascalCase modelName }} from "./delete{{ pascalCase modelName }}";
 
 describe("delete{{ pascalCase modelName }}", () => {
-  it("should delete a {{ noCase modelName }} from the database", async () => {
-    const mockData = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate();
-    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
+  it("should return an empty result when a non-existent {{ noCase modelName }} is requested for deletion", async () => {
+    const mock{{ pascalCase modelName }}Id = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate().id;
+    const result = await delete{{ pascalCase modelName }}(db, mock{{ pascalCase modelName }}Id);
+    expect(result).toBeUndefined();
+  });
 
-    await delete{{ pascalCase modelName }}(db, mockData.id);
+  it("should delete an existing {{ noCase modelName }} from the database and return its data", async () => {
+    const {{ camelCase modelName }} = await create{{ pascalCase modelName }}(db, {
+      ...zocker(New{{ pascalCase modelName }}DTO).generate(),
+    });
 
-    const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^delete from "{{ snakeCase modelName "plural" }}" where "{{ snakeCase modelName "plural" }}"."id" = \$1 returning (.+)$/;
-    expect(query.text).toMatch(q);
-    expect(parameters).toEqual([mockData.id]);
+    const result = await delete{{ pascalCase modelName }}(db, {{ camelCase modelName }}.id);
 
-    spy.mockRestore();
+    expect(result).not.toBeUndefined();
+    expect(result?.id).toBe({{ camelCase modelName }}.id);
   });
 });

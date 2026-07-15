@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { zocker } from "zocker";
 import { db } from "~/database";
 import { New{{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
@@ -6,17 +6,12 @@ import create{{ pascalCase modelName }} from "./create{{ pascalCase modelName }}
 
 describe("create{{ pascalCase modelName }}", () => {
   it("should insert a {{ noCase modelName }} into the database", async () => {
-    const mockData = zocker(New{{ pascalCase modelName }}DTO).generate();
-    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
-
-    await create{{ pascalCase modelName }}(db, mockData);
-
-    expect(spy).toHaveBeenCalled();
-    const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^insert into "{{ snakeCase modelName "plural" }}" (.+) values (.+) returning (.+)$/;
-    expect(query.text).toMatch(q);
-    expect(parameters).toEqual(Object.values(mockData));
-
-    spy.mockRestore();
+    const {{ camelCase modelName }} = await create{{ pascalCase modelName }}(db, {
+      ...zocker(New{{ pascalCase modelName }}DTO).generate(),
+    });
+    const createdAt = Temporal.Instant.from({{ camelCase modelName }}.createdAt);
+    const oneHourAgo = Temporal.Now.instant().subtract({ hours: 1 });
+    const isNotEarlierThanOneHourAgo = Temporal.Instant.compare(createdAt, oneHourAgo) >= 0;
+    expect(isNotEarlierThanOneHourAgo).toBe(true);
   });
 });

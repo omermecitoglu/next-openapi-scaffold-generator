@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { zocker } from "zocker";
 import { db } from "~/database";
-import { {{ pascalCase modelName }}DTO, {{ pascalCase modelName }}PatchDTO } from "~/models/{{ kebabCase modelName }}";
+import { {{ pascalCase modelName }}DTO, {{ pascalCase modelName }}PatchDTO, New{{ pascalCase modelName }}DTO } from "~/models/{{ kebabCase modelName }}";
+import create{{ pascalCase modelName }} from "./create{{ pascalCase modelName }}";
 import update{{ pascalCase modelName }} from "./update{{ pascalCase modelName }}";
 
 describe("update{{ pascalCase modelName }}", () => {
@@ -14,22 +15,24 @@ describe("update{{ pascalCase modelName }}", () => {
     return mock;
   }
 
+  it("should return undefined when a non-existent {{ noCase modelName }} is requested for update", async () => {
+    const mock{{ pascalCase modelName }}Id = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate().id;
+    const result = await update{{ pascalCase modelName }}(db, mock{{ pascalCase modelName }}Id, generateMockPatch());
+    expect(result).toBeUndefined();
+  });
+
   it("should update a {{ noCase modelName }} in the database", async () => {
-    const mockData = zocker({{ pascalCase modelName }}DTO.pick({ id: true })).generate();
+    const created{{ pascalCase modelName }} = await create{{ pascalCase modelName }}(db, {
+      ...zocker(New{{ pascalCase modelName }}DTO).generate(),
+    });
+
     const mockPatch = generateMockPatch();
-    const spy = vi.spyOn(db.$client, "query").mockImplementation(() => Promise.resolve({ rows: [], rowCount: 0 }));
+    const updated{{ pascalCase modelName }} = await update{{ pascalCase modelName }}(db, created{{ pascalCase modelName }}.id, mockPatch);
 
-    await update{{ pascalCase modelName }}(db, mockData.id, mockPatch);
-
-    expect(spy).toHaveBeenCalled();
-    const [query, parameters] = spy.mock.calls[0] as unknown as [{ text: string }, string[]];
-    const q = /^update "{{ snakeCase modelName "plural" }}" set (.+) where (.+) returning (.+)$/;
-    expect(query.text).toMatch(q);
-    expect(parameters).toEqual([
-      ...Object.values(mockPatch).filter(p => typeof p !== "undefined"),
-      mockData.id,
-    ]);
-
-    spy.mockRestore();
+    expect(updated{{ pascalCase modelName }}).not.toBeUndefined();
+    const updatedAt = Temporal.Instant.from(updated{{ pascalCase modelName }}!.updatedAt);
+    const oneHourAgo = Temporal.Now.instant().subtract({ hours: 1 });
+    const isNotEarlierThanOneHourAgo = Temporal.Instant.compare(updatedAt, oneHourAgo) >= 0;
+    expect(isNotEarlierThanOneHourAgo).toBe(true);
   });
 });
