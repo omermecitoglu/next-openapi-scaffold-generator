@@ -3,6 +3,6 @@ import { {{ camelCase modelName "plural" }} } from "~/database/schema/{{ kebabCa
 import { type New{{ pascalCase modelName }} } from "~/models/{{ kebabCase modelName }}";
 
 export default async function create{{ pascalCase modelName }}(db: Omit<typeof database, "$client">, data: New{{ pascalCase modelName }}) {
-  const [{{ camelCase modelName }}] = await db.insert({{ camelCase modelName "plural" }}).values(data).returning({ id: {{ camelCase modelName "plural" }}.id });
+  const [{{ camelCase modelName }}] = await db.insert({{ camelCase modelName "plural" }}).values(data).returning();
   return {{ camelCase modelName }};
 }
